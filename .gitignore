@@ -1,0 +1,22 @@
+.plans/
+benchmarks/samples/
+benchmarks/runs/
+.DS_Store
+.build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+__pycache__/
+*.py[cod]
+recordings/
+models/
+*.wav
+*.m4a
+*.mp3
+!Tests/**/Fixtures/*.wav
+!Tests/**/Fixtures/*.mp3
+
+# internal working files (local only)
+handoff.md
+codex-goal.md
+.codex/

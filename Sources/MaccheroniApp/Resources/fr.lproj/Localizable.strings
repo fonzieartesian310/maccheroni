@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>%@ %@</key>
+	<string>%@ %@</string>
+	<key>%@, %@</key>
+	<string>%@, %@</string>
+	<key>%lld percent</key>
+	<string>%lld pour cent</string>
+	<key>%lld segments, %lld speakers</key>
+	<string>%lld segments, %lld intervenants</string>
+	<key>%lld unresolved</key>
+	<string>%lld non résolu</string>
+	<key>%lld/%lld chunks</key>
+	<string>%lld/%lld morceaux</string>
+	<key>+</key>
+	<string>+</string>
+	<key>A recording is already in progress.</key>
+	<string>Un enregistrement est déjà en cours.</string>
+	<key>A run artifact failed its integrity check: %@</key>
+	<string>Un artefact d'exécution a échoué lors de sa vérification d'intégrité : %@</string>
+	<key>A run artifact is missing: %@</key>
+	<string>Un artefact d'exécution est manquant : %@</string>
+	<key>Add</key>
+	<string>Ajouter</string>
+	<key>Add a name, term, or place</key>
+	<string>Ajouter un nom, un terme ou un lieu</string>
+	<key>Ambiguous Speaker</key>
+	<string>Orateur ambigu</string>
+	<key>An identical retry is disabled because it would use the same model, glossary, and chunk policy.</key>
+	<string>Une nouvelle tentative identique est désactivée, car elle utiliserait le même modèle, glossaire et la même politique de découpage.</string>
+	<key>App Language</key>
+	<string>Langue de l'application</string>
+	<key>Applied</key>
+	<string>Appliqué</string>
+	<key>Audio never leaves this Mac.</key>
+	<string>L'audio ne quitte jamais ce Mac.</string>
+	<key>Automatic</key>
+	<string>Automatique</string>
+	<key>Backchannels</key>
+	<string>Marques d’acquiescement</string>
+	<key>Backend</key>
+	<string>Back-end</string>
+	<key>Both recording channels were empty; the combined recording was retained but cannot be transcribed.</key>
+	<string>Les deux canaux d'enregistrement étaient vides ; l'enregistrement combiné a été conservé mais ne peut être transcrit.</string>
+	<key>Cancel</key>
+	<string>Annuler</string>
+	<key>Cancel Transcription</key>
+	<string>Annuler la transcription</string>
+	<key>Cancelled</key>
+	<string>Annulé</string>
+	<key>Cancelling keeps completed chunks and intermediate artifacts.</key>
+	<string>L'annulation conserve les morceaux terminés et les artefacts intermédiaires.</string>
+	<key>Capture a Conversation</key>
+	<string>Capturer une conversation</string>
+	<key>Captured audio has no readable format description.</key>
+	<string>L'audio capturé n'a pas de description de format lisible.</string>
+	<key>Category</key>
+	<string>Catégorie</string>
+	<key>Channels</key>
+	<string>Canaux</string>
+	<key>Chinese, Simplified</key>
+	<string>Chinois, simplifié</string>
+	<key>Choose Audio File…</key>
+	<string>Choisissez un fichier audio…</string>
+	<key>Chunk %lld of %lld</key>
+	<string>Morceau %lld de %lld</string>
+	<key>Codex</key>
+	<string>Codex</string>
+	<key>Codex post-processing sends transcript text only. The original audio and raw transcript stay unchanged.</key>
+	<string>Le post-traitement du Codex envoie uniquement le texte de la transcription. L'audio original et la transcription brute restent inchangés.</string>
+	<key>Complete</key>
+	<string>Terminé</string>
+	<key>Could not access captured audio samples (status %lld).</key>
+	<string>Impossible d'accéder aux échantillons audio capturés (statut %lld).</string>
+	<key>Could not allocate canonical PCM buffer.</key>
+	<string>Impossible d'allouer le tampon PCM canonique.</string>
+	<key>Could not convert captured PCM (status %lld).</key>
+	<string>Impossible de convertir le PCM capturé (statut %lld).</string>
+	<key>Could not convert microphone audio to canonical PCM.</key>
+	<string>Impossible de convertir l'audio du microphone en PCM canonique.</string>
+	<key>Could not convert system audio to canonical PCM.</key>
+	<string>Impossible de convertir l'audio du système en PCM canonique.</string>
+	<key>Could not copy captured audio samples (status %lld).</key>
+	<string>Impossible de copier les échantillons audio capturés (statut %lld).</string>
+	<key>Could not create a PCM buffer for captured audio.</key>
+	<string>Impossible de créer un tampon PCM pour l'audio capturé.</string>
+	<key>Could not read recording artifact %@.</key>
+	<string>Impossible de lire l'artefact d'enregistrement %@.</string>
+	<key>Coverage</key>
+	<string>Couverture</string>
+	<key>Current Model</key>
+	<string>Modèle actuel</string>
+	<key>Default Post-processing</key>
+	<string>Post-traitement par défaut</string>
+	<key>Disk Use</key>
+	<string>Utilisation du disque</string>
+	<key>Done</key>
+	<string>Fait</string>
+	<key>Download Pinned Model…</key>
+	<string>Télécharger le modèle épinglé…</string>
+	<key>Download Pinned Model</key>
+	<string>Télécharger le modèle épinglé</string>
+	<key>Drop an audio file here</key>
+	<string>Déposez un fichier audio ici</string>
+	<key>Edit Glossary</key>
+	<string>Modifier le glossaire</string>
+	<key>Elapsed</key>
+	<string>Écoulé</string>
+	<key>English</key>
+	<string>Anglais</string>
+	<key>English Meeting</key>
+	<string>Réunion en anglais</string>
+	<key>English is the default. A manual choice applies to Maccheroni without changing the Mac system language.</key>
+	<string>L'anglais est la langue par défaut. Un choix manuel s'applique à Maccheroni sans changer la langue du système Mac.</string>
+	<key>Enhancement</key>
+	<string>Renforcement</string>
+	<key>Export</key>
+	<string>Exporter</string>
+	<key>Failed</key>
+	<string>Échoué</string>
+	<key>Failure Details</key>
+	<string>Détails de l’échec</string>
+	<key>French</key>
+	<string>Français</string>
+	<key>General</key>
+	<string>Général</string>
+	<key>German</key>
+	<string>Allemand</string>
+	<key>Glossaries</key>
+	<string>Glossaires</string>
+	<key>Glossary</key>
+	<string>Glossaire</string>
+	<key>Glossary Could Not Be Saved</key>
+	<string>Le glossaire n'a pas pu être enregistré</string>
+	<key>Has Conflicts</key>
+	<string>A des conflits</string>
+	<key>Import Audio</key>
+	<string>Importer du son</string>
+	<key>Import Audio…</key>
+	<string>Importer du son…</string>
+	<key>Import an audio file for transcription.</key>
+	<string>Importez un fichier audio pour la transcription.</string>
+	<key>Injection Mode</key>
+	<string>Mode d'injection</string>
+	<key>Input Integrity</key>
+	<string>Intégrité des entrées</string>
+	<key>Inspect the preserved run. For a new attempt, choose a different profile or transcribe a shorter copy. The original recording stays unchanged.</key>
+	<string>Inspectez l’exécution conservée. Pour une nouvelle tentative, choisissez un autre profil ou transcrivez une copie plus courte. L’enregistrement d’origine reste inchangé.</string>
+	<key>Installed</key>
+	<string>Installé</string>
+	<key>Italian</key>
+	<string>italien</string>
+	<key>Italian Dialogue</key>
+	<string>Dialogue italien</string>
+	<key>Items</key>
+	<string>Articles</string>
+	<key>Japanese</key>
+	<string>japonais</string>
+	<key>Korean</key>
+	<string>coréen</string>
+	<key>Korean IT Meeting</key>
+	<string>Réunion informatique coréenne</string>
+	<key>Language</key>
+	<string>Langue</string>
+	<key>Languages</key>
+	<string>Langues</string>
+	<key>Leave Unresolved</key>
+	<string>Laisser en suspens</string>
+	<key>Library</key>
+	<string>Bibliothèque</string>
+	<key>Local</key>
+	<string>Local</string>
+	<key>Local Library</key>
+	<string>Bibliothèque locale</string>
+	<key>Maccheroni Could Not Start</key>
+	<string>Les macaronis n'ont pas pu démarrer</string>
+	<key>Maccheroni Needs Attention</key>
+	<string>Les macaronis ont besoin d’attention</string>
+	<key>Maccheroni could not find a display whose system audio can be captured.</key>
+	<string>Maccheroni n'a pas trouvé d'écran dont l'audio du système peut être capturé.</string>
+	<key>Maccheroni is processing the full recording locally.</key>
+	<string>Maccheroni traite l'intégralité de l'enregistrement localement.</string>
+	<key>Maccheroni never deletes or overwrites recordings, raw transcripts, or completed run artifacts. Model removal uses the macOS Trash.</key>
+	<string>Maccheroni ne supprime ni n'écrase jamais les enregistrements, les transcriptions brutes ou les artefacts d'exécution terminés. La suppression du modèle utilise la corbeille macOS.</string>
+	<key>Maccheroni will not overwrite an existing recording artifact: %@.</key>
+	<string>Maccheroni n'écrasera pas un artefact d'enregistrement existant : %@.</string>
+	<key>Markdown</key>
+	<string>Markdown</string>
+	<key>Merging</key>
+	<string>Fusion</string>
+	<key>Microphone</key>
+	<string>Microphone</string>
+	<key>Models</key>
+	<string>Modèles</string>
+	<key>Move Model to Trash</key>
+	<string>Déplacer le modèle vers la corbeille</string>
+	<key>New Recording</key>
+	<string>Nouvel enregistrement</string>
+	<key>No</key>
+	<string>Non</string>
+	<key>No cloud service is selected by default. Audio never leaves this Mac; Codex receives transcript text only when explicitly selected.</key>
+	<string>Aucun service cloud n'est sélectionné par défaut. L'audio ne quitte jamais ce Mac ; Le Codex reçoit le texte de transcription uniquement lorsqu'il est explicitement sélectionné.</string>
+	<key>No local benchmark is available for this profile yet.</key>
+	<string>Aucune référence locale n'est encore disponible pour ce profil.</string>
+	<key>None</key>
+	<string>Aucun</string>
+	<key>Not Installed</key>
+	<string>Non installé</string>
+	<key>OK</key>
+	<string>D'ACCORD</string>
+	<key>Off</key>
+	<string>Désactivé</string>
+	<key>On</key>
+	<string>Activé</string>
+	<key>Open the capture view.</key>
+	<string>Ouvrez la vue de capture.</string>
+	<key>Original File</key>
+	<string>Fichier original</string>
+	<key>Overlapping Speech</key>
+	<string>Discours superposés</string>
+	<key>Peak Normalization</key>
+	<string>Normalisation du pic</string>
+	<key>People</key>
+	<string>Personnes</string>
+	<key>Pipeline</key>
+	<string>Pipeline</string>
+	<key>Places</key>
+	<string>Lieux</string>
+	<key>Portuguese</key>
+	<string>portugais</string>
+	<key>Post-processing</key>
+	<string>Post-traitement</string>
+	<key>Preparing</key>
+	<string>Préparation en cours</string>
+	<key>Preparing Maccheroni…</key>
+	<string>Préparation de Maccheroni…</string>
+	<key>Preprocessing</key>
+	<string>Prétraitement</string>
+	<key>Primary Model</key>
+	<string>Modèle principal</string>
+	<key>Profile</key>
+	<string>Profil</string>
+	<key>Provided</key>
+	<string>Fourni</string>
+	<key>Quantization</key>
+	<string>Quantification</string>
+	<key>Ready to Transcribe</key>
+	<string>Prêt à transcrire</string>
+	<key>Record microphone and system audio as separate local originals, or import an existing audio file.</key>
+	<string>Enregistrez l’audio du microphone et du système en tant qu’originaux locaux distincts ou importez un fichier audio existant.</string>
+	<key>Recorded</key>
+	<string>Enregistré</string>
+	<key>Recording</key>
+	<string>Enregistrement</string>
+	<key>Recording %@</key>
+	<string>Enregistrement %@</string>
+	<key>Recording Not Found</key>
+	<string>Enregistrement introuvable</string>
+	<key>Recording artifact %@ is not canonical 48 kHz mono PCM.</key>
+	<string>L'artefact d'enregistrement %@ n'est pas un PCM mono canonique à 48 kHz.</string>
+	<key>Recording failed: %@</key>
+	<string>L'enregistrement a échoué : %@</string>
+	<key>Recordings</key>
+	<string>Enregistrements</string>
+	<key>Remove</key>
+	<string>Retirer</string>
+	<key>Remove %@</key>
+	<string>Retirer %@</string>
+	<key>Rename Speaker</key>
+	<string>Renommer le haut-parleur</string>
+	<key>Rename this speaker everywhere in the corrected transcript.</key>
+	<string>Renommez cet intervenant partout dans la transcription corrigée.</string>
+	<key>Resolved</key>
+	<string>Résolu</string>
+	<key>Reveal</key>
+	<string>Afficher</string>
+	<key>Reveal Original in Finder</key>
+	<string>Révéler l'original dans le Finder</string>
+	<key>Reveal Preserved Run</key>
+	<string>Afficher l’exécution conservée</string>
+	<key>Reveal Run in Finder</key>
+	<string>Afficher l’exécution dans le Finder</string>
+	<key>Reveal in Finder</key>
+	<string>Révéler dans le Finder</string>
+	<key>Review Profiles</key>
+	<string>Consulter les profils</string>
+	<key>Review Uncertain Transcript</key>
+	<string>Revoir la transcription incertaine</string>
+	<key>Revision</key>
+	<string>Révision</string>
+	<key>Run</key>
+	<string>Exécution</string>
+	<key>Run Could Not Be Opened</key>
+	<string>L'exécution n'a pas pu être ouverte</string>
+	<key>Run ID</key>
+	<string>ID d'exécution</string>
+	<key>Run Inspector</key>
+	<string>Inspecteur d’exécution</string>
+	<key>Run Output</key>
+	<string>Sortie d’exécution</string>
+	<key>Russian</key>
+	<string>russe</string>
+	<key>SHA-256</key>
+	<string>SHA-256</string>
+	<key>SRT Subtitles</key>
+	<string>Sous-titres SRT</string>
+	<key>Same-settings retry unavailable</key>
+	<string>Nouvelle tentative avec les mêmes réglages indisponible</string>
+	<key>Sample Rate</key>
+	<string>Taux d'échantillonnage</string>
+	<key>Save</key>
+	<string>Sauvegarder</string>
+	<key>Segment %lld does not have a valid SRT time range.</key>
+	<string>Le segment %lld n'a pas de plage horaire SRT valide.</string>
+	<key>Segments JSON</key>
+	<string>Segments JSON</string>
+	<key>Settings Could Not Be Loaded</key>
+	<string>Les paramètres n'ont pas pu être chargés</string>
+	<key>Show or hide exact run and model details.</key>
+	<string>Afficher ou masquer les détails exacts de l'exécution et du modèle.</string>
+	<key>Size</key>
+	<string>Taille</string>
+	<key>Spanish</key>
+	<string>Espagnol</string>
+	<key>Speaker Diarization</key>
+	<string>Diarisation des locuteurs</string>
+	<key>Speaker name</key>
+	<string>Nom du locuteur</string>
+	<key>Start Recording</key>
+	<string>Commencer l'enregistrement</string>
+	<key>Starts separate microphone and system audio capture.</key>
+	<string>Démarre une capture audio séparée du microphone et du système.</string>
+	<key>Status</key>
+	<string>Statut</string>
+	<key>Stop Recording</key>
+	<string>Arrêter l'enregistrement</string>
+	<key>Stop the active recording before importing audio.</key>
+	<string>Arrêtez l’enregistrement en cours avant d’importer un fichier audio.</string>
+	<key>Stop the active recording before starting transcription.</key>
+	<string>Arrêtez l’enregistrement en cours avant de lancer la transcription.</string>
+	<key>Stops capture and begins transcription.</key>
+	<string>Arrête la capture et commence la transcription.</string>
+	<key>Storage</key>
+	<string>Stockage</string>
+	<key>System Audio</key>
+	<string>Audio du système</string>
+	<key>Term Recall</key>
+	<string>Rappel des termes</string>
+	<key>Terms</key>
+	<string>Termes</string>
+	<key>The Maccheroni command-line engine is missing.</key>
+	<string>Le moteur de ligne de commande Maccheroni est manquant.</string>
+	<key>The Hugging Face %@ command failed (exit %lld): %@</key>
+	<string>La commande Hugging Face %@ a échoué (code de sortie %lld) : %@</string>
+	<key>The Hugging Face command finished, but the pinned model location is missing: %@</key>
+	<string>La commande Hugging Face est terminée, mais l’emplacement du modèle épinglé est introuvable : %@</string>
+	<key>The Hugging Face command-line tool (hf) is not installed. Install it, then try again.</key>
+	<string>L’outil de ligne de commande Hugging Face (hf) n’est pas installé. Installez-le, puis réessayez.</string>
+	<key>The Hugging Face command-line tool could not start: %@</key>
+	<string>Impossible de démarrer l’outil de ligne de commande Hugging Face : %@</string>
+	<key>The bundled profile registry is missing.</key>
+	<string>Le registre de profils fourni est manquant.</string>
+	<key>The derived combined recording could not be read after writing: %@.</key>
+	<string>L'enregistrement combiné dérivé n'a pas pu être lu après l'écriture : %@.</string>
+	<key>The exported speaker name is empty for segment %lld.</key>
+	<string>Le nom du locuteur exporté est vide pour le segment %lld.</string>
+	<key>The exported text is empty for segment %lld.</key>
+	<string>Le texte exporté est vide pour le segment %lld.</string>
+	<key>The library entry is no longer available.</key>
+	<string>L'entrée de la bibliothèque n'est plus disponible.</string>
+	<key>The original audio and completed artifacts were preserved. You can inspect the run or try again.</key>
+	<string>L’audio original et les artefacts terminés ont été préservés. Vous pouvez inspecter l'exécution ou réessayer.</string>
+	<key>The original audio and completed attempt artifacts were preserved. MOSS still reached its output limit after the failed range was split into smaller chunks.</key>
+	<string>L’audio d’origine et les artefacts de la tentative terminée ont été conservés. MOSS a tout de même atteint sa limite de sortie après que la plage en échec a été divisée en morceaux plus petits.</string>
+	<key>The original audio and every completed intermediate artifact were preserved.</key>
+	<string>L’audio original et chaque artefact intermédiaire terminé ont été préservés.</string>
+	<key>The original audio is not available.</key>
+	<string>L'audio original n'est pas disponible.</string>
+	<key>The profile registry is invalid: %@</key>
+	<string>Le registre de profils n'est pas valide : %@</string>
+	<key>The raw run remains on disk, but one or more required artifacts failed an integrity check.</key>
+	<string>L'exécution brute reste sur le disque, mais un ou plusieurs artefacts requis ont échoué à la vérification de l'intégrité.</string>
+	<key>The recording artifact name is unsafe: %@.</key>
+	<string>Le nom de l'artefact d'enregistrement n'est pas sécurisé : %@.</string>
+	<key>The recording is preserved and ready for the selected profile.</key>
+	<string>L'enregistrement est conservé et prêt pour le profil sélectionné.</string>
+	<key>The run contains an unsafe artifact path: %@</key>
+	<string>L'exécution contient un chemin d'artefact non sécurisé : %@</string>
+	<key>The run did not succeed.</key>
+	<string>L’exécution a échoué.</string>
+	<key>The selected file has no readable audio duration.</key>
+	<string>Le fichier sélectionné n'a pas de durée audio lisible.</string>
+	<key>The transcription engine could not start: %@</key>
+	<string>Le moteur de transcription n'a pas pu démarrer : %@</string>
+	<key>The transcription engine exited with status %lld.</key>
+	<string>Le moteur de transcription s'est arrêté avec le statut %lld.</string>
+	<key>The transcription engine finished without a run directory.</key>
+	<string>Le moteur de transcription s'est terminé sans répertoire d'exécution.</string>
+	<key>There is no active recording.</key>
+	<string>Il n'y a pas d'enregistrement actif.</string>
+	<key>This name applies to every %@ segment in corrected exports.</key>
+	<string>Ce nom s'applique à chaque segment %@ dans les exportations corrigées.</string>
+	<key>This run reached the MOSS output limit after bounded splitting. Choose a different profile or use a shorter copy before retrying.</key>
+	<string>Cette exécution a atteint la limite de sortie de MOSS malgré la division limitée. Choisissez un autre profil ou utilisez une copie plus courte avant de réessayer.</string>
+	<key>This segment was marked uncertain by the pipeline.</key>
+	<string>Ce segment a été marqué comme incertain par le pipeline.</string>
+	<key>Transcribing</key>
+	<string>Transcription</string>
+	<key>Transcript</key>
+	<string>Transcription</string>
+	<key>Transcript Could Not Be Exported</key>
+	<string>La transcription n'a pas pu être exportée</string>
+	<key>Transcript Disagreement</key>
+	<string>Désaccord sur la transcription</string>
+	<key>Transcription</key>
+	<string>Transcription</string>
+	<key>Transcription Cancelled</key>
+	<string>Transcription annulée</string>
+	<key>Transcription Failed</key>
+	<string>Échec de la transcription</string>
+	<key>Transcription Limit Reached</key>
+	<string>Limite de transcription atteinte</string>
+	<key>Transcription and the selected post-processing path run locally. The original audio and raw transcript stay unchanged.</key>
+	<string>La transcription et le chemin de post-traitement sélectionné s'exécutent localement. L'audio original et la transcription brute restent inchangés.</string>
+	<key>Truncated</key>
+	<string>Tronqué</string>
+	<key>Try Again</key>
+	<string>Essayer à nouveau</string>
+	<key>Uncertain</key>
+	<string>Incertain</string>
+	<key>Use System Language</key>
+	<string>Utiliser la langue du système</string>
+	<key>Verification Model %lld</key>
+	<string>Modèle de vérification %lld</string>
+	<key>Voice Activity Detection</key>
+	<string>Détection d'activité vocale</string>
+	<key>Wait for the active transcription to finish.</key>
+	<string>Attendez la fin de la transcription active.</string>
+	<key>Wall Time</key>
+	<string>Temps écoulé</string>
+	<key>Yes</key>
+	<string>Oui</string>
+	<key>Your selection is stored as a correction beside the immutable raw transcript.</key>
+	<string>Votre sélection est stockée sous forme de correction à côté de la transcription brute immuable.</string>
+	<key>•</key>
+	<string>•</string>
+	<key>%lld bytes</key>
+	<string>%lld octets</string>
+	<key>A new setup selects Codex only when its CLI is signed in; otherwise it selects Local. Codex receives transcript text only. Audio never leaves this Mac.</key>
+	<string>Une nouvelle configuration sélectionne Codex uniquement si son CLI est connecté; sinon elle sélectionne Local. Codex reçoit uniquement le texte de la transcription. L’audio ne quitte jamais ce Mac.</string>
+	<key>Audio stays on this Mac. Transcription runs locally; Codex receives transcript text only during post-processing.</key>
+	<string>L’audio reste sur ce Mac. La transcription s’exécute localement; Codex reçoit le texte de la transcription uniquement lors du post-traitement.</string>
+	<key>Batches Planned</key>
+	<string>Lots planifiés</string>
+	<key>Check Again</key>
+	<string>Vérifier à nouveau</string>
+	<key>Checking availability…</key>
+	<string>Vérification de la disponibilité…</string>
+	<key>Chooses the language the transcript is translated into.</key>
+	<string>Choisit la langue dans laquelle la transcription est traduite.</string>
+	<key>Codex CLI</key>
+	<string>CLI Codex</string>
+	<key>Codex CLI was not found. Install it and run codex login in Terminal, or select Local meanwhile.</key>
+	<string>Le CLI Codex est introuvable. Installez-le et exécutez codex login dans Terminal, ou sélectionnez Local entre-temps.</string>
+	<key>Codex is installed but not signed in. Run codex login in Terminal, or select Local meanwhile.</key>
+	<string>Codex est installé, mais non connecté. Exécutez codex login dans Terminal, ou sélectionnez Local entre-temps.</string>
+	<key>Codex is not signed in. Run codex login in Terminal, then try again, or select Local.</key>
+	<string>Codex n’est pas connecté. Exécutez codex login dans Terminal, puis réessayez, ou sélectionnez Local.</string>
+	<key>Codex is signed in and ready.</key>
+	<string>Codex est connecté et prêt.</string>
+	<key>Correct</key>
+	<string>Corriger</string>
+	<key>Input Mode</key>
+	<string>Mode d’entrée</string>
+	<key>Installed and signed in</key>
+	<string>Installé et connecté</string>
+	<key>Installed, not signed in. Run codex login in Terminal.</key>
+	<string>Installé, non connecté. Exécutez codex login dans Terminal.</string>
+	<key>Largest Accepted Output Bound</key>
+	<string>Plus grande limite de sortie acceptée</string>
+	<key>Largest Batch Estimate</key>
+	<string>Plus grande estimation de lot</string>
+	<key>Largest Batch Input</key>
+	<string>Plus grande entrée de lot</string>
+	<key>Largest Raw Response</key>
+	<string>Plus grande réponse brute</string>
+	<key>Model ID</key>
+	<string>ID du modèle</string>
+	<key>Operation</key>
+	<string>Opération</string>
+	<key>Output Estimate Formula</key>
+	<string>Formule d’estimation de sortie</string>
+	<key>Output Planning Budget</key>
+	<string>Budget de planification de sortie</string>
+	<key>Output Token Limit</key>
+	<string>Limite de jetons de sortie</string>
+	<key>Prompt Limit</key>
+	<string>Limite de l’invite</string>
+	<key>Rename this speaker everywhere in this transcript.</key>
+	<string>Renommez cet intervenant partout dans cette transcription.</string>
+	<key>Segments per Batch</key>
+	<string>Segments par lot</string>
+	<key>Service-managed (limit unavailable)</key>
+	<string>Géré par le service (limite indisponible)</string>
+	<key>Source Segments SHA-256</key>
+	<string>SHA-256 des segments source</string>
+	<key>Target Language</key>
+	<string>Langue cible</string>
+	<key>Text only</key>
+	<string>Texte uniquement</string>
+	<key>Translate</key>
+	<string>Traduire</string>
+	<key>Translate Into</key>
+	<string>Traduire en</string>
+	<key>This name applies to every %@ segment in exports.</key>
+	<string>Ce nom s’applique à chaque segment %@ dans les exportations.</string>
+	<key>Choose Folder…</key>
+	<string>Choisir un dossier…</string>
+	<key>Use Default</key>
+	<string>Utiliser les réglages par défaut</string>
+	<key>Directory choices apply the next time Maccheroni launches. Existing recordings and run artifacts stay where they are.</key>
+	<string>Les choix de dossiers s'appliqueront au prochain lancement de Maccheroni. Les enregistrements existants et les artefacts d'exécution restent là où ils sont.</string>
+	<key>MACCHERONI_LIBRARY_ROOT controls the recording and run paths for this launch.</key>
+	<string>MACCHERONI_LIBRARY_ROOT contrôle les chemins des enregistrements et des exécutions pour ce lancement.</string>
+	<key>Planned Model</key>
+	<string>Modèle prévu</string>
+	<key>Play this segment from the source audio.</key>
+	<string>Jouez ce segment à partir de l’audio source.</string>
+	<key>Codex receives bounded transcript text, the active profile's full glossary and its hash, post-processing instructions, and the target language when translating. Audio and source artifacts stay on this Mac unchanged.</key>
+	<string>Codex reçoit du texte de transcription limité, le glossaire complet du profil actif et son hachage, les instructions de post-traitement et, lors d’une traduction, la langue cible. L’audio et les artefacts source restent inchangés sur ce Mac.</string>
+	<key>A new setup selects Codex only when its CLI is signed in; otherwise it selects Local. Codex receives bounded transcript text, the active profile's full glossary and its hash, post-processing instructions, and the target language when translating. Audio never leaves this Mac.</key>
+	<string>Une nouvelle configuration sélectionne Codex uniquement si son CLI est connecté; sinon elle sélectionne Local. Codex reçoit du texte de transcription limité, le glossaire complet du profil actif et son hachage, les instructions de post-traitement et, lors d’une traduction, la langue cible. L’audio ne quitte jamais ce Mac.</string>
+	<key>Audio stays on this Mac. Transcription runs locally; during post-processing Codex receives bounded transcript text, the active profile's full glossary and its hash, post-processing instructions, and the target language when translating.</key>
+	<string>L’audio reste sur ce Mac. La transcription s’exécute localement; lors du post-traitement, Codex reçoit du texte de transcription limité, le glossaire complet du profil actif et son hachage, les instructions de post-traitement et, lors d’une traduction, la langue cible.</string>
+	</dict>
+</plist>

@@ -1,0 +1,7 @@
+{
+  "segments": [
+    { "speaker": 0, "start": 0.0, "end": 2.0, "duration": 2.0 },
+    { "speaker": 1, "start": 3.0, "end": 28.8898125, "duration": 25.8898125 }
+  ],
+  "num_speakers": 2
+}

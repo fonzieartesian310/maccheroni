@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>%@ %@</key>
+	<string>%@ %@</string>
+	<key>%@, %@</key>
+	<string>%@、%@</string>
+	<key>%lld percent</key>
+	<string>%lld パーセント</string>
+	<key>%lld segments, %lld speakers</key>
+	<string>%lld セグメント、%lld 話者</string>
+	<key>%lld unresolved</key>
+	<string>%lldは未解決です</string>
+	<key>%lld/%lld chunks</key>
+	<string>%lld/%lld チャンク</string>
+	<key>+</key>
+	<string>+</string>
+	<key>A recording is already in progress.</key>
+	<string>すでに録音が進行中です。</string>
+	<key>A run artifact failed its integrity check: %@</key>
+	<string>実行アーティファクトが整合性チェックに失敗しました: %@</string>
+	<key>A run artifact is missing: %@</key>
+	<string>実行アーティファクトが欠落しています: %@</string>
+	<key>Add</key>
+	<string>追加</string>
+	<key>Add a name, term, or place</key>
+	<string>名前、用語、または場所を追加します</string>
+	<key>Ambiguous Speaker</key>
+	<string>あいまいな話者</string>
+	<key>An identical retry is disabled because it would use the same model, glossary, and chunk policy.</key>
+	<string>同一のモデル、用語集、チャンク方針を使用するため、同じ設定での再試行は無効です。</string>
+	<key>App Language</key>
+	<string>アプリの言語</string>
+	<key>Applied</key>
+	<string>適用済み</string>
+	<key>Audio never leaves this Mac.</key>
+	<string>オーディオがこの Mac から出ることはありません。</string>
+	<key>Automatic</key>
+	<string>自動</string>
+	<key>Backchannels</key>
+	<string>相づち</string>
+	<key>Backend</key>
+	<string>バックエンド</string>
+	<key>Both recording channels were empty; the combined recording was retained but cannot be transcribed.</key>
+	<string>両方の録音チャンネルは空でした。結合された録音は保持されましたが、転写することはできません。</string>
+	<key>Cancel</key>
+	<string>キャンセル</string>
+	<key>Cancel Transcription</key>
+	<string>転写のキャンセル</string>
+	<key>Cancelled</key>
+	<string>キャンセル</string>
+	<key>Cancelling keeps completed chunks and intermediate artifacts.</key>
+	<string>キャンセルすると、完了したチャンクと中間成果物が保持されます。</string>
+	<key>Capture a Conversation</key>
+	<string>会話をキャプチャする</string>
+	<key>Captured audio has no readable format description.</key>
+	<string>キャプチャされたオーディオには、判読可能な形式の説明がありません。</string>
+	<key>Category</key>
+	<string>カテゴリ</string>
+	<key>Channels</key>
+	<string>チャンネル</string>
+	<key>Chinese, Simplified</key>
+	<string>中国語、簡体字</string>
+	<key>Choose Audio File…</key>
+	<string>音声ファイルを選択してください…</string>
+	<key>Chunk %lld of %lld</key>
+	<string>チャンク %lld/%lld</string>
+	<key>Codex</key>
+	<string>Codex</string>
+	<key>Codex post-processing sends transcript text only. The original audio and raw transcript stay unchanged.</key>
+	<string>Codex の後処理では、トランスクリプト テキストのみが送信されます。元の音声と生のトランスクリプトは変更されません。</string>
+	<key>Complete</key>
+	<string>完了</string>
+	<key>Could not access captured audio samples (status %lld).</key>
+	<string>キャプチャされたオーディオ サンプルにアクセスできませんでした (ステータス %lld)。</string>
+	<key>Could not allocate canonical PCM buffer.</key>
+	<string>正規の PCM バッファを割り当てることができませんでした。</string>
+	<key>Could not convert captured PCM (status %lld).</key>
+	<string>キャプチャした PCM を変換できませんでした (ステータス %lld)。</string>
+	<key>Could not convert microphone audio to canonical PCM.</key>
+	<string>マイクの音声を標準 PCM に変換できませんでした。</string>
+	<key>Could not convert system audio to canonical PCM.</key>
+	<string>システムオーディオを標準 PCM に変換できませんでした。</string>
+	<key>Could not copy captured audio samples (status %lld).</key>
+	<string>キャプチャされたオーディオ サンプルをコピーできませんでした (ステータス %lld)。</string>
+	<key>Could not create a PCM buffer for captured audio.</key>
+	<string>キャプチャしたオーディオ用の PCM バッファを作成できませんでした。</string>
+	<key>Could not read recording artifact %@.</key>
+	<string>記録アーティファクト %@ を読み取れませんでした。</string>
+	<key>Coverage</key>
+	<string>カバレッジ</string>
+	<key>Current Model</key>
+	<string>現行モデル</string>
+	<key>Default Post-processing</key>
+	<string>デフォルトの後処理</string>
+	<key>Disk Use</key>
+	<string>ディスク使用量</string>
+	<key>Done</key>
+	<string>完了</string>
+	<key>Download Pinned Model…</key>
+	<string>ピン留めされたモデルをダウンロード…</string>
+	<key>Download Pinned Model</key>
+	<string>固定されたモデルをダウンロード</string>
+	<key>Drop an audio file here</key>
+	<string>ここに音声ファイルをドロップします</string>
+	<key>Edit Glossary</key>
+	<string>用語集の編集</string>
+	<key>Elapsed</key>
+	<string>経過</string>
+	<key>English</key>
+	<string>英語</string>
+	<key>English Meeting</key>
+	<string>英語ミーティング</string>
+	<key>English is the default. A manual choice applies to Maccheroni without changing the Mac system language.</key>
+	<string>英語がデフォルトです。手動選択は、Mac システム言語を変更せずに Maccheroni に適用されます。</string>
+	<key>Enhancement</key>
+	<string>強化</string>
+	<key>Export</key>
+	<string>輸出</string>
+	<key>Failed</key>
+	<string>失敗した</string>
+	<key>Failure Details</key>
+	<string>失敗の詳細</string>
+	<key>French</key>
+	<string>フランス語</string>
+	<key>General</key>
+	<string>一般的な</string>
+	<key>German</key>
+	<string>ドイツ語</string>
+	<key>Glossaries</key>
+	<string>用語集</string>
+	<key>Glossary</key>
+	<string>用語集</string>
+	<key>Glossary Could Not Be Saved</key>
+	<string>用語集を保存できませんでした</string>
+	<key>Has Conflicts</key>
+	<string>競合がある</string>
+	<key>Import Audio</key>
+	<string>オーディオをインポートする</string>
+	<key>Import Audio…</key>
+	<string>オーディオをインポート…</string>
+	<key>Import an audio file for transcription.</key>
+	<string>文字起こし用の音声ファイルをインポートします。</string>
+	<key>Injection Mode</key>
+	<string>注入モード</string>
+	<key>Input Integrity</key>
+	<string>入力の整合性</string>
+	<key>Inspect the preserved run. For a new attempt, choose a different profile or transcribe a shorter copy. The original recording stays unchanged.</key>
+	<string>保存された実行を確認してください。新しく試す場合は、別のプロファイルを選ぶか、より短いコピーを文字起こししてください。元の録音は変更されません。</string>
+	<key>Installed</key>
+	<string>インストール済み</string>
+	<key>Italian</key>
+	<string>イタリア語</string>
+	<key>Italian Dialogue</key>
+	<string>イタリア語対話</string>
+	<key>Items</key>
+	<string>アイテム</string>
+	<key>Japanese</key>
+	<string>日本語</string>
+	<key>Korean</key>
+	<string>韓国語</string>
+	<key>Korean IT Meeting</key>
+	<string>韓国IT会議</string>
+	<key>Language</key>
+	<string>言語</string>
+	<key>Languages</key>
+	<string>言語</string>
+	<key>Leave Unresolved</key>
+	<string>未解決のままにする</string>
+	<key>Library</key>
+	<string>図書館</string>
+	<key>Local</key>
+	<string>ローカル</string>
+	<key>Local Library</key>
+	<string>ローカルライブラリ</string>
+	<key>Maccheroni Could Not Start</key>
+	<string>Maccheroniを開始できませんでした</string>
+	<key>Maccheroni Needs Attention</key>
+	<string>Maccheroniに注意が必要です</string>
+	<key>Maccheroni could not find a display whose system audio can be captured.</key>
+	<string>Maccheroni は、システム オーディオをキャプチャできるディスプレイを見つけることができませんでした。</string>
+	<key>Maccheroni is processing the full recording locally.</key>
+	<string>Maccheroni は完全な録音をローカルで処理しています。</string>
+	<key>Maccheroni never deletes or overwrites recordings, raw transcripts, or completed run artifacts. Model removal uses the macOS Trash.</key>
+	<string>Maccheroni は、録音、生のトランスクリプト、または完了した実行アーティファクトを削除したり上書きしたりすることはありません。モデルの削除には macOS のゴミ箱を使用します。</string>
+	<key>Maccheroni will not overwrite an existing recording artifact: %@.</key>
+	<string>Maccheroni は既存の記録アーティファクト %@ を上書きしません。</string>
+	<key>Markdown</key>
+	<string>マークダウン</string>
+	<key>Merging</key>
+	<string>結合</string>
+	<key>Microphone</key>
+	<string>マイクロフォン</string>
+	<key>Models</key>
+	<string>モデル</string>
+	<key>Move Model to Trash</key>
+	<string>モデルをゴミ箱に移動</string>
+	<key>New Recording</key>
+	<string>新規録音</string>
+	<key>No</key>
+	<string>いいえ</string>
+	<key>No cloud service is selected by default. Audio never leaves this Mac; Codex receives transcript text only when explicitly selected.</key>
+	<string>デフォルトではクラウド サービスは選択されていません。オーディオがこの Mac から出ることはありません。 Codex は、明示的に選択された場合にのみトランスクリプト テキストを受け取ります。</string>
+	<key>No local benchmark is available for this profile yet.</key>
+	<string>このプロファイルにはまだローカル ベンチマークがありません。</string>
+	<key>None</key>
+	<string>なし</string>
+	<key>Not Installed</key>
+	<string>インストールされていません</string>
+	<key>OK</key>
+	<string>わかりました</string>
+	<key>Off</key>
+	<string>オフ</string>
+	<key>On</key>
+	<string>オン</string>
+	<key>Open the capture view.</key>
+	<string>キャプチャ ビューを開きます。</string>
+	<key>Original File</key>
+	<string>元のファイル</string>
+	<key>Overlapping Speech</key>
+	<string>重複するスピーチ</string>
+	<key>Peak Normalization</key>
+	<string>ピークの正規化</string>
+	<key>People</key>
+	<string>人々</string>
+	<key>Pipeline</key>
+	<string>パイプライン</string>
+	<key>Places</key>
+	<string>場所</string>
+	<key>Portuguese</key>
+	<string>ポルトガル語</string>
+	<key>Post-processing</key>
+	<string>後処理</string>
+	<key>Preparing</key>
+	<string>準備中</string>
+	<key>Preparing Maccheroni…</key>
+	<string>Maccheroniを準備中…</string>
+	<key>Preprocessing</key>
+	<string>前処理</string>
+	<key>Primary Model</key>
+	<string>プライマリモデル</string>
+	<key>Profile</key>
+	<string>プロフィール</string>
+	<key>Provided</key>
+	<string>提供された</string>
+	<key>Quantization</key>
+	<string>量子化</string>
+	<key>Ready to Transcribe</key>
+	<string>文字起こしの準備ができました</string>
+	<key>Record microphone and system audio as separate local originals, or import an existing audio file.</key>
+	<string>マイクとシステム オーディオを別々のローカル オリジナルとして録音するか、既存のオーディオ ファイルをインポートします。</string>
+	<key>Recorded</key>
+	<string>録音済み</string>
+	<key>Recording</key>
+	<string>録音</string>
+	<key>Recording %@</key>
+	<string>録音中 %@</string>
+	<key>Recording Not Found</key>
+	<string>録音が見つかりません</string>
+	<key>Recording artifact %@ is not canonical 48 kHz mono PCM.</key>
+	<string>録音アーティファクト %@ は正規の 48 kHz モノラル PCM ではありません。</string>
+	<key>Recording failed: %@</key>
+	<string>記録に失敗しました: %@</string>
+	<key>Recordings</key>
+	<string>録音</string>
+	<key>Remove</key>
+	<string>取り除く</string>
+	<key>Remove %@</key>
+	<string>取り除く %@</string>
+	<key>Rename Speaker</key>
+	<string>スピーカーの名前を変更する</string>
+	<key>Rename this speaker everywhere in the corrected transcript.</key>
+	<string>修正されたトランスクリプト内のすべての場所で、この発言者の名前を変更します。</string>
+	<key>Resolved</key>
+	<string>解決済み</string>
+	<key>Reveal</key>
+	<string>表示</string>
+	<key>Reveal Original in Finder</key>
+	<string>Finder でオリジナルを表示</string>
+	<key>Reveal Preserved Run</key>
+	<string>保存済みの実行結果を表示</string>
+	<key>Reveal Run in Finder</key>
+	<string>Finder で実行を表示</string>
+	<key>Reveal in Finder</key>
+	<string>ファインダーで表示</string>
+	<key>Review Profiles</key>
+	<string>プロファイルを確認</string>
+	<key>Review Uncertain Transcript</key>
+	<string>不確実な転写を確認する</string>
+	<key>Revision</key>
+	<string>リビジョン</string>
+	<key>Run</key>
+	<string>実行</string>
+	<key>Run Could Not Be Opened</key>
+	<string>実行を開けませんでした</string>
+	<key>Run ID</key>
+	<string>実行ID</string>
+	<key>Run Inspector</key>
+	<string>実行インスペクタ</string>
+	<key>Run Output</key>
+	<string>実行出力</string>
+	<key>Russian</key>
+	<string>ロシア語</string>
+	<key>SHA-256</key>
+	<string>SHA-256</string>
+	<key>SRT Subtitles</key>
+	<string>SRT 字幕</string>
+	<key>Same-settings retry unavailable</key>
+	<string>同じ設定での再試行は利用できません</string>
+	<key>Sample Rate</key>
+	<string>サンプルレート</string>
+	<key>Save</key>
+	<string>保存</string>
+	<key>Segment %lld does not have a valid SRT time range.</key>
+	<string>セグメント %lld には有効な SRT 時間範囲がありません。</string>
+	<key>Segments JSON</key>
+	<string>セグメントJSON</string>
+	<key>Settings Could Not Be Loaded</key>
+	<string>設定をロードできませんでした</string>
+	<key>Show or hide exact run and model details.</key>
+	<string>正確な実行およびモデルの詳細を表示または非表示にします。</string>
+	<key>Size</key>
+	<string>サイズ</string>
+	<key>Spanish</key>
+	<string>スペイン語</string>
+	<key>Speaker Diarization</key>
+	<string>スピーカーのダイアライゼーション</string>
+	<key>Speaker name</key>
+	<string>話者名</string>
+	<key>Start Recording</key>
+	<string>録音を開始する</string>
+	<key>Starts separate microphone and system audio capture.</key>
+	<string>個別のマイクとシステムオーディオキャプチャを開始します。</string>
+	<key>Status</key>
+	<string>状態</string>
+	<key>Stop Recording</key>
+	<string>録音を停止する</string>
+	<key>Stop the active recording before importing audio.</key>
+	<string>音声を読み込む前に、進行中の録音を停止してください。</string>
+	<key>Stop the active recording before starting transcription.</key>
+	<string>文字起こしを開始する前に、進行中の録音を停止してください。</string>
+	<key>Stops capture and begins transcription.</key>
+	<string>キャプチャを停止し、転写を開始します。</string>
+	<key>Storage</key>
+	<string>ストレージ</string>
+	<key>System Audio</key>
+	<string>システムオーディオ</string>
+	<key>Term Recall</key>
+	<string>用語のリコール</string>
+	<key>Terms</key>
+	<string>用語</string>
+	<key>The Maccheroni command-line engine is missing.</key>
+	<string>Maccheroni コマンドライン エンジンがありません。</string>
+	<key>The Hugging Face %@ command failed (exit %lld): %@</key>
+	<string>Hugging Face %@ コマンドが失敗しました（終了コード %lld）: %@</string>
+	<key>The Hugging Face command finished, but the pinned model location is missing: %@</key>
+	<string>Hugging Face コマンドは完了しましたが、固定されたモデルの場所がありません: %@</string>
+	<key>The Hugging Face command-line tool (hf) is not installed. Install it, then try again.</key>
+	<string>Hugging Face コマンドラインツール（hf）がインストールされていません。インストールしてからもう一度お試しください。</string>
+	<key>The Hugging Face command-line tool could not start: %@</key>
+	<string>Hugging Face コマンドラインツールを起動できませんでした: %@</string>
+	<key>The bundled profile registry is missing.</key>
+	<string>バンドルされたプロファイル レジストリがありません。</string>
+	<key>The derived combined recording could not be read after writing: %@.</key>
+	<string>派生した結合記録を書き込み後に読み取れませんでした: %@。</string>
+	<key>The exported speaker name is empty for segment %lld.</key>
+	<string>セグメント %lld のエクスポートされたスピーカー名が空です。</string>
+	<key>The exported text is empty for segment %lld.</key>
+	<string>エクスポートされたテキストのセグメント %lld は空です。</string>
+	<key>The library entry is no longer available.</key>
+	<string>ライブラリのエントリは利用できなくなりました。</string>
+	<key>The original audio and completed artifacts were preserved. You can inspect the run or try again.</key>
+	<string>オリジナルのオーディオと完成した成果物は保存されました。実行を検査するか、再試行できます。</string>
+	<key>The original audio and completed attempt artifacts were preserved. MOSS still reached its output limit after the failed range was split into smaller chunks.</key>
+	<string>元のオーディオと完了した試行のアーティファクトは保持されました。失敗した範囲をより小さなチャンクに分割した後も、MOSS は出力上限に達しました。</string>
+	<key>The original audio and every completed intermediate artifact were preserved.</key>
+	<string>オリジナルのオーディオと完成したすべての中間成果物が保存されました。</string>
+	<key>The original audio is not available.</key>
+	<string>オリジナルの音声は利用できません。</string>
+	<key>The profile registry is invalid: %@</key>
+	<string>プロファイル レジストリが無効です: %@</string>
+	<key>The raw run remains on disk, but one or more required artifacts failed an integrity check.</key>
+	<string>未処理の実行はディスク上に残りますが、1 つ以上の必要なアーティファクトが整合性チェックに失敗しました。</string>
+	<key>The recording artifact name is unsafe: %@.</key>
+	<string>記録アーティファクト名は安全ではありません: %@。</string>
+	<key>The recording is preserved and ready for the selected profile.</key>
+	<string>録音は保存され、選択したプロファイルで使用できるようになります。</string>
+	<key>The run contains an unsafe artifact path: %@</key>
+	<string>実行には安全でないアーティファクト パスが含まれています: %@</string>
+	<key>The run did not succeed.</key>
+	<string>実行は成功しませんでした。</string>
+	<key>The selected file has no readable audio duration.</key>
+	<string>選択したファイルには、読み取り可能な音声時間がありません。</string>
+	<key>The transcription engine could not start: %@</key>
+	<string>文字起こしエンジンを開始できませんでした: %@</string>
+	<key>The transcription engine exited with status %lld.</key>
+	<string>文字起こしエンジンはステータス %lld で終了しました。</string>
+	<key>The transcription engine finished without a run directory.</key>
+	<string>転写エンジンは実行ディレクトリなしで終了しました。</string>
+	<key>There is no active recording.</key>
+	<string>アクティブな録音はありません。</string>
+	<key>This name applies to every %@ segment in corrected exports.</key>
+	<string>この名前は、修正されたエクスポート内のすべての %@ セグメントに適用されます。</string>
+	<key>This run reached the MOSS output limit after bounded splitting. Choose a different profile or use a shorter copy before retrying.</key>
+	<string>この実行は、上限を設けた分割後も MOSS の出力上限に達しました。再試行する前に別のプロファイルを選ぶか、より短いコピーを使用してください。</string>
+	<key>This segment was marked uncertain by the pipeline.</key>
+	<string>このセグメントはパイプラインによって不確実とマークされました。</string>
+	<key>Transcribing</key>
+	<string>文字起こし</string>
+	<key>Transcript</key>
+	<string>文字起こし</string>
+	<key>Transcript Could Not Be Exported</key>
+	<string>トランスクリプトをエクスポートできませんでした</string>
+	<key>Transcript Disagreement</key>
+	<string>転写物の不一致</string>
+	<key>Transcription</key>
+	<string>転写</string>
+	<key>Transcription Cancelled</key>
+	<string>転写はキャンセルされました</string>
+	<key>Transcription Failed</key>
+	<string>転写に失敗しました</string>
+	<key>Transcription Limit Reached</key>
+	<string>文字起こしの上限に達しました</string>
+	<key>Transcription and the selected post-processing path run locally. The original audio and raw transcript stay unchanged.</key>
+	<string>文字起こしと選択した後処理パスはローカルで実行されます。元の音声と生のトランスクリプトは変更されません。</string>
+	<key>Truncated</key>
+	<string>切り詰められた</string>
+	<key>Try Again</key>
+	<string>もう一度やり直してください</string>
+	<key>Uncertain</key>
+	<string>不確実</string>
+	<key>Use System Language</key>
+	<string>システム言語を使用する</string>
+	<key>Verification Model %lld</key>
+	<string>検証モデル %lld</string>
+	<key>Voice Activity Detection</key>
+	<string>音声アクティビティの検出</string>
+	<key>Wait for the active transcription to finish.</key>
+	<string>アクティブな文字起こしが完了するまで待ちます。</string>
+	<key>Wall Time</key>
+	<string>ウォールタイム</string>
+	<key>Yes</key>
+	<string>はい</string>
+	<key>Your selection is stored as a correction beside the immutable raw transcript.</key>
+	<string>選択内容は、不変の生のトランスクリプトの横に修正として保存されます。</string>
+	<key>•</key>
+	<string>•</string>
+	<key>%lld bytes</key>
+	<string>%lld バイト</string>
+	<key>A new setup selects Codex only when its CLI is signed in; otherwise it selects Local. Codex receives transcript text only. Audio never leaves this Mac.</key>
+	<string>新しい設定では、CLI にサインインしている場合にのみ Codex が選択されます。そうでない場合は Local が選択されます。Codex が受け取るのはトランスクリプトのテキストのみです。音声がこの Mac から出ることはありません。</string>
+	<key>Audio stays on this Mac. Transcription runs locally; Codex receives transcript text only during post-processing.</key>
+	<string>音声はこの Mac にとどまります。文字起こしはローカルで実行され、Codex がトランスクリプトのテキストを受け取るのは後処理中のみです。</string>
+	<key>Batches Planned</key>
+	<string>予定バッチ数</string>
+	<key>Check Again</key>
+	<string>もう一度確認</string>
+	<key>Checking availability…</key>
+	<string>利用可能か確認中…</string>
+	<key>Chooses the language the transcript is translated into.</key>
+	<string>トランスクリプトの翻訳先言語を選択します。</string>
+	<key>Codex CLI</key>
+	<string>Codex CLI</string>
+	<key>Codex CLI was not found. Install it and run codex login in Terminal, or select Local meanwhile.</key>
+	<string>Codex CLI が見つかりません。インストールしてターミナルで codex login を実行するか、当面は Local を選択してください。</string>
+	<key>Codex is installed but not signed in. Run codex login in Terminal, or select Local meanwhile.</key>
+	<string>Codex はインストールされていますが、サインインしていません。ターミナルで codex login を実行するか、当面は Local を選択してください。</string>
+	<key>Codex is not signed in. Run codex login in Terminal, then try again, or select Local.</key>
+	<string>Codex にサインインしていません。ターミナルで codex login を実行してからもう一度試すか、Local を選択してください。</string>
+	<key>Codex is signed in and ready.</key>
+	<string>Codex はサインイン済みで使用できます。</string>
+	<key>Correct</key>
+	<string>修正</string>
+	<key>Input Mode</key>
+	<string>入力モード</string>
+	<key>Installed and signed in</key>
+	<string>インストール済み、サインイン済み</string>
+	<key>Installed, not signed in. Run codex login in Terminal.</key>
+	<string>インストール済み、未サインインです。ターミナルで codex login を実行してください。</string>
+	<key>Largest Accepted Output Bound</key>
+	<string>最大許容出力上限</string>
+	<key>Largest Batch Estimate</key>
+	<string>最大バッチ見積もり</string>
+	<key>Largest Batch Input</key>
+	<string>最大バッチ入力</string>
+	<key>Largest Raw Response</key>
+	<string>最大未処理応答</string>
+	<key>Model ID</key>
+	<string>モデル ID</string>
+	<key>Operation</key>
+	<string>操作</string>
+	<key>Output Estimate Formula</key>
+	<string>出力見積もりの式</string>
+	<key>Output Planning Budget</key>
+	<string>出力計画バジェット</string>
+	<key>Output Token Limit</key>
+	<string>出力トークン上限</string>
+	<key>Prompt Limit</key>
+	<string>プロンプト上限</string>
+	<key>Rename this speaker everywhere in this transcript.</key>
+	<string>このトランスクリプト内のこの話者名をすべて変更します。</string>
+	<key>Segments per Batch</key>
+	<string>バッチあたりのセグメント数</string>
+	<key>Service-managed (limit unavailable)</key>
+	<string>サービス管理（上限は利用不可）</string>
+	<key>Source Segments SHA-256</key>
+	<string>ソースセグメント SHA-256</string>
+	<key>Target Language</key>
+	<string>翻訳先の言語</string>
+	<key>Text only</key>
+	<string>テキストのみ</string>
+	<key>Translate</key>
+	<string>翻訳</string>
+	<key>Translate Into</key>
+	<string>翻訳先</string>
+	<key>This name applies to every %@ segment in exports.</key>
+	<string>この名前はエクスポート内のすべての %@ セグメントに適用されます。</string>
+	<key>Choose Folder…</key>
+	<string>フォルダを選択…</string>
+	<key>Use Default</key>
+	<string>デフォルトを使う</string>
+	<key>Directory choices apply the next time Maccheroni launches. Existing recordings and run artifacts stay where they are.</key>
+	<string>ディレクトリの選択は次回Maccheroniを起動したときに適用されます。既存の録音と実行成果物は現在の場所に残ります。</string>
+	<key>MACCHERONI_LIBRARY_ROOT controls the recording and run paths for this launch.</key>
+	<string>MACCHERONI_LIBRARY_ROOT は今回の起動時の録音と実行パスを制御します。</string>
+	<key>Planned Model</key>
+	<string>予定モデル</string>
+	<key>Play this segment from the source audio.</key>
+	<string>このセグメントをソースオーディオから再生します。</string>
+	<key>Codex receives bounded transcript text, the active profile's full glossary and its hash, post-processing instructions, and the target language when translating. Audio and source artifacts stay on this Mac unchanged.</key>
+	<string>Codex は、上限を設けたトランスクリプトのテキスト、アクティブなプロフィールの用語集全体とそのハッシュ、後処理の指示、翻訳時には翻訳先の言語を受け取ります。音声とソースアーティファクトは変更されずにこの Mac に残ります。</string>
+	<key>A new setup selects Codex only when its CLI is signed in; otherwise it selects Local. Codex receives bounded transcript text, the active profile's full glossary and its hash, post-processing instructions, and the target language when translating. Audio never leaves this Mac.</key>
+	<string>新しい設定では、CLI にサインインしている場合にのみ Codex が選択されます。そうでない場合は Local が選択されます。Codex は、上限を設けたトランスクリプトのテキスト、アクティブなプロフィールの用語集全体とそのハッシュ、後処理の指示、翻訳時には翻訳先の言語を受け取ります。音声がこの Mac から出ることはありません。</string>
+	<key>Audio stays on this Mac. Transcription runs locally; during post-processing Codex receives bounded transcript text, the active profile's full glossary and its hash, post-processing instructions, and the target language when translating.</key>
+	<string>音声はこの Mac にとどまります。文字起こしはローカルで実行され、後処理中に Codex は上限を設けたトランスクリプトのテキスト、アクティブなプロフィールの用語集全体とそのハッシュ、後処理の指示、翻訳時には翻訳先の言語を受け取ります。</string>
+	</dict>
+</plist>

@@ -1,0 +1,417 @@
+import Foundation
+import MaccheroniCore
+
+enum TranscriptionRunnerError: Error, LocalizedError {
+    case executableMissing
+    case launchFailed(String)
+    case pipelineFailed(String)
+    case resultMissing
+
+    var errorDescription: String? {
+        switch self {
+        case .executableMissing:
+            appString("The Maccheroni command-line engine is missing.")
+        case let .launchFailed(message):
+            appString("The transcription engine could not start: \(message)")
+        case let .pipelineFailed(message):
+            message
+        case .resultMissing:
+            appString("The transcription engine finished without a run directory.")
+        }
+    }
+}
+
+@MainActor
+final class ProcessTranscriptionRunner: TranscriptionRunning {
+    private let executableURL: URL
+    private let requestsRoot: URL
+    private let terminationTiming: ProcessTerminationTiming
+    private var process: Process?
+    private var cancelRequested = false
+
+    init(
+        executableURL: URL? = nil,
+        requestsRoot: URL = LibraryRepository.local.requestsRoot,
+        terminationTiming: ProcessTerminationTiming = .default
+    ) throws {
+        guard let resolved = executableURL ?? Self.resolveExecutable(),
+              FileManager.default.isExecutableFile(atPath: resolved.path)
+        else {
+            throw TranscriptionRunnerError.executableMissing
+        }
+        self.executableURL = resolved
+        self.requestsRoot = requestsRoot
+        self.terminationTiming = terminationTiming
+    }
+
+    func run(
+        _ request: TranscriptionRequest,
+        progress: @escaping @MainActor (RunProgressSnapshot) -> Void
+    ) async throws -> URL {
+        guard process == nil else {
+            throw TranscriptionRunnerError.launchFailed("another run is active")
+        }
+        cancelRequested = false
+        let requestDirectory = try createRequestDirectory()
+        let profileURL = requestDirectory.appendingPathComponent("profiles.json")
+        try writeProfile(for: request, to: profileURL)
+        let stdoutURL = requestDirectory.appendingPathComponent("stdout.log")
+        let stderrURL = requestDirectory.appendingPathComponent("stderr.log")
+        try Data().write(to: stdoutURL, options: .withoutOverwriting)
+        try Data().write(to: stderrURL, options: .withoutOverwriting)
+        let stdout = try FileHandle(forWritingTo: stdoutURL)
+        let stderr = try FileHandle(forWritingTo: stderrURL)
+        defer {
+            try? stdout.close()
+            try? stderr.close()
+            process = nil
+        }
+
+        try FileManager.default.createDirectory(
+            at: request.outputRoot,
+            withIntermediateDirectories: true
+        )
+        let directoriesBefore = try childDirectories(of: request.outputRoot)
+        let launchedAt = Date()
+        let task = Process()
+        task.executableURL = executableURL
+        task.arguments = arguments(for: request, profileURL: profileURL)
+        task.environment = ProcessInfo.processInfo.environment.merging([
+            "HF_HUB_OFFLINE": "1",
+        ]) { current, _ in current }
+        task.standardOutput = stdout
+        task.standardError = stderr
+        do {
+            try task.run()
+        } catch {
+            throw TranscriptionRunnerError.launchFailed(error.localizedDescription)
+        }
+        process = task
+        let liveness = TranscriptionProcessLiveness(task)
+        var runURL: URL?
+        var progressAccumulator = RunProgressAccumulator()
+        progress(RunProgressSnapshot(
+            stage: .preparing,
+            completedChunks: 0,
+            plannedChunks: 0,
+            elapsedS: 0,
+            stageElapsedS: progressAccumulator.observe(stage: .preparing, atElapsedS: 0),
+            modelID: nil,
+            message: nil,
+            runURL: nil
+        ))
+
+        while task.isRunning {
+            if cancelRequested || Task.isCancelled {
+                cancelRequested = true
+                await terminate(task, liveness: liveness)
+                break
+            }
+            if runURL == nil {
+                let current = try childDirectories(of: request.outputRoot)
+                runURL = current.subtracting(directoriesBefore)
+                    .sorted { $0.lastPathComponent < $1.lastPathComponent }
+                    .last
+            }
+            if let runURL, let manifest = try? readManifest(at: runURL) {
+                progress(snapshot(
+                    for: manifest,
+                    runURL: runURL,
+                    launchedAt: launchedAt,
+                    requestedPostprocessModelID: request.postprocess.requestedModelID,
+                    accumulator: &progressAccumulator
+                ))
+            }
+            do {
+                try await Task.sleep(for: .milliseconds(250))
+            } catch {
+                cancelRequested = true
+                await terminate(task, liveness: liveness)
+                break
+            }
+        }
+        if !cancelRequested, !Task.isCancelled {
+            task.waitUntilExit()
+        }
+        stdout.synchronizeFile()
+        stderr.synchronizeFile()
+        if runURL == nil {
+            let current = try childDirectories(of: request.outputRoot)
+            runURL = current.subtracting(directoriesBefore)
+                .sorted { $0.lastPathComponent < $1.lastPathComponent }
+                .last
+        }
+        if runURL == nil {
+            let printed = try String(contentsOf: stdoutURL, encoding: .utf8)
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            if !printed.isEmpty {
+                runURL = URL(fileURLWithPath: printed)
+            }
+        }
+        if let runURL, let manifest = try? readManifest(at: runURL) {
+            progress(snapshot(
+                for: manifest,
+                runURL: runURL,
+                launchedAt: launchedAt,
+                requestedPostprocessModelID: request.postprocess.requestedModelID,
+                accumulator: &progressAccumulator
+            ))
+        }
+        if cancelRequested || Task.isCancelled {
+            throw CancellationError()
+        }
+        guard task.terminationStatus == 0 else {
+            let message = try String(contentsOf: stderrURL, encoding: .utf8)
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            throw TranscriptionRunnerError.pipelineFailed(
+                message.isEmpty
+                    ? appString("The transcription engine exited with status \(task.terminationStatus).")
+                    : message
+            )
+        }
+        guard let runURL else { throw TranscriptionRunnerError.resultMissing }
+        let manifest = try readManifest(at: runURL)
+        progress(snapshot(
+            for: manifest,
+            runURL: runURL,
+            launchedAt: launchedAt,
+            requestedPostprocessModelID: request.postprocess.requestedModelID,
+            accumulator: &progressAccumulator
+        ))
+        guard manifest.status == .succeeded else {
+            throw TranscriptionRunnerError.pipelineFailed(
+                manifest.failure?.message ?? appString("The run did not succeed.")
+            )
+        }
+        return runURL
+    }
+
+    func cancel() {
+        cancelRequested = true
+    }
+
+    private func terminate(_ task: Process, liveness: TranscriptionProcessLiveness) async {
+        _ = await ProcessTerminator.terminate(
+            processID: task.processIdentifier,
+            isRunning: { liveness.process.isRunning },
+            timing: terminationTiming
+        )
+    }
+
+    private func arguments(
+        for request: TranscriptionRequest,
+        profileURL: URL
+    ) -> [String] {
+        var values = [
+            "run",
+            request.sourceURL.path,
+            "--profile", request.profile.cliProfile,
+            "--profiles", profileURL.path,
+            "--output-root", request.outputRoot.path,
+        ]
+        if let glossaryURL = request.glossaryURL {
+            values += ["--glossary", glossaryURL.path]
+        }
+        return values
+    }
+
+    private func createRequestDirectory() throws -> URL {
+        try FileManager.default.createDirectory(
+            at: requestsRoot,
+            withIntermediateDirectories: true
+        )
+        let directory = requestsRoot.appendingPathComponent(
+            "request-\(UUID().uuidString.lowercased())",
+            isDirectory: true
+        )
+        try FileManager.default.createDirectory(
+            at: directory,
+            withIntermediateDirectories: false
+        )
+        return directory
+    }
+
+    private func writeProfile(
+        for request: TranscriptionRequest,
+        to url: URL
+    ) throws {
+        struct Diarization: Encodable {
+            var enabled = true
+            var backend: String
+        }
+        struct Profile: Encodable {
+            var name: String
+            var asrBackend: String
+            var languagePin: String
+            var diarization: Diarization
+            var postprocess: String
+            var postprocessMode: String
+            var targetLanguage: String?
+
+            enum CodingKeys: String, CodingKey {
+                case name, diarization, postprocess
+                case asrBackend = "asr_backend"
+                case languagePin = "language_pin"
+                case postprocessMode = "postprocess_mode"
+                case targetLanguage = "target_language"
+            }
+        }
+        struct Document: Encodable {
+            var schemaVersion = "1.0.0"
+            var profiles: [Profile]
+
+            enum CodingKeys: String, CodingKey {
+                case profiles
+                case schemaVersion = "schema_version"
+            }
+        }
+        let profile = Profile(
+            name: request.profile.cliProfile,
+            asrBackend: request.profile.asrBackend,
+            languagePin: request.profile.languagePin,
+            diarization: Diarization(backend: request.profile.diarizationBackend),
+            postprocess: request.postprocess.rawValue,
+            postprocessMode: request.postprocessMode.rawValue,
+            targetLanguage: request.postprocess == .none
+                || request.postprocessMode == .correction
+                ? nil
+                : request.translationTargetLanguage
+        )
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        try encoder.encode(Document(profiles: [profile]))
+            .write(to: url, options: .withoutOverwriting)
+    }
+
+    private func childDirectories(of root: URL) throws -> Set<URL> {
+        let values = try FileManager.default.contentsOfDirectory(
+            at: root,
+            includingPropertiesForKeys: [.isDirectoryKey],
+            options: [.skipsHiddenFiles]
+        )
+        return Set(try values.filter {
+            try $0.resourceValues(forKeys: [.isDirectoryKey]).isDirectory == true
+        }.map(\.standardizedFileURL))
+    }
+
+    private func readManifest(at runURL: URL) throws -> Manifest {
+        try JSONDecoder().decode(
+            Manifest.self,
+            from: Data(contentsOf: runURL.appendingPathComponent("manifest.json"))
+        )
+    }
+
+    private func snapshot(
+        for manifest: Manifest,
+        runURL: URL,
+        launchedAt: Date,
+        requestedPostprocessModelID: String?,
+        accumulator: inout RunProgressAccumulator
+    ) -> RunProgressSnapshot {
+        let message = manifest.coverage.message ?? manifest.failure?.message
+        let stage: PipelineStage
+        if manifest.status == .succeeded {
+            stage = .complete
+        } else if manifest.failure?.code != "RUN_INCOMPLETE" {
+            stage = .failed
+        } else if message?.contains("preprocessing") == true
+                    || message?.contains("chunk plan") == true {
+            stage = .preprocessing
+        } else if message?.contains("diarization") == true {
+            stage = .diarization
+        } else if message?.contains("ASR chunk") == true {
+            stage = manifest.coverage.chunksCompleted == manifest.coverage.chunksPlanned
+                ? .merge
+                : .asr
+        } else if message?.contains("postprocess") == true {
+            stage = .postprocess
+        } else {
+            stage = .preparing
+        }
+        let elapsedS = RunProgressAccumulator.sanitizedElapsed(
+            Date().timeIntervalSince(launchedAt)
+        ) ?? 0
+        let projection = RunProgressSnapshot.modelProjection(
+            for: stage,
+            models: manifest.models,
+            postprocess: manifest.postprocess,
+            requestedPostprocessModelID: requestedPostprocessModelID
+        )
+        return RunProgressSnapshot(
+            stage: stage,
+            completedChunks: manifest.coverage.chunksCompleted,
+            plannedChunks: manifest.coverage.chunksPlanned,
+            elapsedS: elapsedS,
+            stageElapsedS: accumulator.observe(stage: stage, atElapsedS: elapsedS),
+            modelID: projection.modelID,
+            modelIDIsProvisional: projection.isProvisional,
+            message: message,
+            runURL: runURL
+        )
+    }
+
+    private static func resolveExecutable() -> URL? {
+        let environment = ProcessInfo.processInfo.environment
+        if let override = environment["MACCHERONI_CLI_PATH"], !override.isEmpty {
+            return URL(fileURLWithPath: override)
+        }
+        if let current = Bundle.main.executableURL {
+            let sibling = current.deletingLastPathComponent().appendingPathComponent("maccheroni")
+            if FileManager.default.isExecutableFile(atPath: sibling.path) { return sibling }
+        }
+        let repository = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        for path in [".build/release/maccheroni", ".build/debug/maccheroni"] {
+            let candidate = repository.appendingPathComponent(path)
+            if FileManager.default.isExecutableFile(atPath: candidate.path) { return candidate }
+        }
+        return nil
+    }
+}
+
+struct RunProgressAccumulator: Sendable {
+    private(set) var stageElapsedS: [PipelineStage: Double] = [:]
+    private var currentStage: PipelineStage?
+    private var lastElapsedS: Double?
+
+    mutating func observe(
+        stage: PipelineStage,
+        atElapsedS elapsedS: Double
+    ) -> [PipelineStage: Double] {
+        let currentElapsedS = Self.sanitizedElapsed(elapsedS)
+        if currentStage != stage {
+            advanceCurrentStage(to: currentElapsedS)
+            currentStage = stage
+            lastElapsedS = currentElapsedS
+            stageElapsedS[stage, default: 0] += 0
+        } else {
+            advanceCurrentStage(to: currentElapsedS)
+        }
+        return stageElapsedS
+    }
+
+    static func sanitizedElapsed(_ elapsedS: Double) -> Double? {
+        guard elapsedS.isFinite else { return nil }
+        return max(0, elapsedS)
+    }
+
+    private mutating func advanceCurrentStage(to currentElapsedS: Double?) {
+        guard let stage = currentStage,
+              let previousElapsedS = lastElapsedS,
+              let currentElapsedS
+        else { return }
+
+        stageElapsedS[stage, default: 0] += max(0, currentElapsedS - previousElapsedS)
+        lastElapsedS = max(previousElapsedS, currentElapsedS)
+    }
+}
+
+private final class TranscriptionProcessLiveness: @unchecked Sendable {
+    let process: Process
+
+    init(_ process: Process) {
+        self.process = process
+    }
+}

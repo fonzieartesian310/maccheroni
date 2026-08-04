@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0.0",
+  "profiles": [
+    { "name": "ko-meeting", "asr_backend": "vibevoice", "language_pin": "auto", "diarization": { "enabled": true, "backend": "community1" }, "postprocess": "none", "glossary_path": null },
+    { "name": "it-dialogue", "asr_backend": "moss", "language_pin": "it", "diarization": { "enabled": true, "backend": "community1" }, "postprocess": "none", "glossary_path": null }
+  ]
+}

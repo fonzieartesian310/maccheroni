@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "20260803T041530Z-7f3a9c",
+  "status": "succeeded",
+  "input": {
+    "file_name": "synthetic.wav",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "size_bytes": 320044
+  },
+  "backend": {
+    "name": "synthetic-contract-runner",
+    "version": "1.0.0"
+  },
+  "models": [
+    {
+      "role": "asr",
+      "hf_model_id": "Qwen/Qwen3-ASR-1.7B",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "quantization": "bf16"
+    }
+  ],
+  "glossary": {
+    "provided": true,
+    "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+    "item_count": 2,
+    "injection_mode": "free_text_context",
+    "applied": true
+  },
+  "preprocessing": {
+    "sample_rate_hz": 16000,
+    "channels": 1,
+    "peak_normalization": true,
+    "vad": {
+      "enabled": true,
+      "backend": "Silero VAD"
+    },
+    "enhancement": {
+      "enabled": false,
+      "backend": null
+    }
+  },
+  "coverage": {
+    "input_duration_s": 10.0,
+    "processed_duration_s": 10.0,
+    "truncated": false,
+    "strategy": "full",
+    "chunks_planned": 1,
+    "chunks_completed": 1
+  },
+  "chunk_boundaries": [
+    {
+      "index": 0,
+      "start_s": 0.0,
+      "end_s": 10.0,
+      "status": "succeeded"
+    }
+  ],
+  "timing": {
+    "started_at": "2026-08-03T04:15:30Z",
+    "finished_at": "2026-08-03T04:15:42Z",
+    "wall_time_s": 12.0
+  },
+  "peak_memory_bytes": 4294967296,
+  "artifacts": [
+    {
+      "kind": "raw_transcript",
+      "path": "primary/raw.txt",
+      "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+    }
+  ],
+  "failure": null
+}

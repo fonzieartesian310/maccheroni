@@ -1,0 +1,11 @@
+[project]
+name = "maccheroni-asr-runtime"
+version = "0.1.0"
+description = "Pinned local subprocess runtime for Maccheroni ASR adapters"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "mlx-audio==0.4.6",
+]
+
+[tool.uv]
+package = false

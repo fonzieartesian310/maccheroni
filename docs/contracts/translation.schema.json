@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maccheroni.local/schemas/translation.schema.json",
+  "title": "Maccheroni translation artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "target_language",
+    "source_segments_sha256",
+    "batches",
+    "translations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "target_language": {
+      "type": "string",
+      "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$"
+    },
+    "source_segments_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "batches": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/batch"
+      }
+    },
+    "translations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/translation"
+      }
+    }
+  },
+  "$defs": {
+    "batch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "batch_index",
+        "segment_indices",
+        "prompt_utf8_bytes",
+        "input_text_utf8_bytes",
+        "estimated_output_tokens",
+        "output_text_utf8_bytes",
+        "response_utf8_bytes",
+        "accepted_output_token_upper_bound"
+      ],
+      "properties": {
+        "batch_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "segment_indices": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "prompt_utf8_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "input_text_utf8_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "estimated_output_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "output_text_utf8_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "response_utf8_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "accepted_output_token_upper_bound": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "translation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "segment_index",
+        "translated_text"
+      ],
+      "properties": {
+        "segment_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "translated_text": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

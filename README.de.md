@@ -1,0 +1,159 @@
+<p align="center">
+  <img src="docs/assets/banner.png" alt="Maccheroni: eine mit Makkaroni verflochtene Wellenform, durchzogen von zwei Sprecherlinien" width="100%">
+</p>
+
+<h1 align="center">Maccheroni</h1>
+
+<p align="center">
+  Lokale Transkription gemischtsprachiger Gespräche auf Apple Silicon.<br>
+  Glossarinjektion beim Dekodieren · Sprecherdiarisierung der gesamten Datei · Audio verlässt niemals deinen Mac.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/platform-macOS%2026%20(arm64)-black" alt="Plattform">
+  <img src="https://img.shields.io/badge/swift-6-F05138" alt="Swift">
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="Lizenz">
+</p>
+
+<p align="center">
+  <a href="README.md">English</a> · <b>Deutsch</b> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <a href="README.it.md">Italiano</a> · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a> · <a href="README.pt.md">Português</a> · <a href="README.ru.md">Русский</a> · <a href="README.zh-Hans.md">简体中文</a>
+</p>
+
+---
+
+**Maccheroni** (von *macaronic speech*, also Äußerungen, die Sprachen mischen) transkribiert die Gespräche, an denen die meisten Apps unbemerkt scheitern: koreanische Meetings mit englischen Produktnamen in jedem Satz, Sprachunterricht und mehrsprachige Anrufe. Alles läuft mit festgeschriebenen MLX/CoreML-Modellen auf dem Gerät.
+
+So sieht ein Export aus (anschauliches Beispiel, keine Modellausgabe):
+
+```markdown
+**Sprecher 1** [00:04] Sind die Smoke Tests auf Staging durchgelaufen, bevor wir den PR gemergt haben?
+**Sprecher 2** [00:09] Ja, und der Kubernetes-Rollout war sauber. [UNCERTAIN] Im
+                      Dashboard gibt es aber noch einen Ausschlag bei der
+                      [CONFLICT: Latenz|Lizenz].
+**Sprecher 1** [00:17] Alles klar, dann bleibt das Release-Fenster wie geplant.
+```
+
+Unsichere Korrekturen werden gekennzeichnet und niemals stillschweigend ersetzt. Die Sprecherbezeichnungen stammen aus einem einzigen Diarisierungslauf über die gesamte Datei und bleiben dadurch auch in einer zweistündigen Aufnahme konsistent.
+
+## Warum es dieses Projekt gibt
+
+Am 2. August 2026 haben wir sieben lokale macOS-Transkriptions-Apps auf Quellcodeebene geprüft. Keine erfüllte die Kombination, die echte gemischtsprachige Meetings brauchen:
+
+- Apps mit lokaler Diarisierung übergaben das Glossar nicht an das ASR-Modell. Stattdessen nutzten sie nachträgliche Zeichenkettenersetzung, wirkungslose SDK-Parameter oder Wörterbücher, die nur in der Cloud verfügbar waren.
+- Die App mit dem saubersten Glossar auf Modellebene bot keine Diarisierung.
+- „Mehrsprachige Unterstützung“ bedeutet fast immer *eine Sprache pro Sitzung*. Gemischtsprachige Äußerungen funktionieren gerade nicht so.
+
+Auf Bibliotheksebene sind alle Bausteine vorhanden. Auf App-Ebene fehlte ihre Kombination. Dieses Repository setzt sie um; die Prüfung ist unter [docs/reference-project-source-audit.md](docs/reference-project-source-audit.md) dokumentiert.
+
+## Was Maccheroni unterscheidet
+
+1. **Glossar beim Dekodieren.** Namen und Fachbegriffe gelangen vor dem Dekodieren in den Modellkontext, denn ein ASR-Fehler zerstört die akustische Evidenz in dem Moment, in dem er entsteht. Nachbearbeitung kann Text glätten, aber nicht wiederherstellen, was der Decoder nie geschrieben hat. Die Glossarnutzlast jedes Blatts wird mit einem Hash versiegelt im Ausführungsmanifest abgelegt.
+2. **Ein Diarisierungslauf bestimmt die Sprecher.** Die gesamte Datei wird einmal diarisiert; ausschließlich diese Zeitleiste legt die Sprecher fest. ASR arbeitet in begrenzten Abschnitten und führt sie anhand der Zeitstempel zusammen. Lokale Sprecherschätzungen eines Abschnitts können daher an einer Grenze niemals eine Bezeichnung vertauschen.
+3. **Niemals stiller Datenverlust.** Eingaben oberhalb des Backend-Limits schlagen ausdrücklich fehl oder erzeugen einen Aufteilungsplan. Abgeschnittene Modellausgabe ist ein typisierter Fehler (`invalid_eos_output`) und kein kürzeres Transkript. Originale und Rohtranskripte sind unveränderlich; Korrekturen und Übersetzungen werden als getrennte, nur neu angelegte Artefakte gespeichert.
+
+## Funktionsweise
+
+```mermaid
+flowchart LR
+    accTitle: Maccheroni-Pipeline
+    accDescr: Audio wird auf dem Mac aufgenommen und verarbeitet. Nur der optionale Codex-Pfad sendet begrenzte Textmengen außerhalb des Geräts.
+    subgraph mac["Dein Mac (Audio verlässt ihn nie)"]
+        A["Aufnahme<br/>Mikrofon + Systemaudio"] --> B["Diarisierung der gesamten Datei<br/>eine globale Sprecherzeitleiste"]
+        A --> C["ASR-Blätter<br/>jeweils max. 120 s,<br/>Glossar pro Blatt injiziert"]
+        B --> D["Zusammenführung nach Zeitstempel<br/>die Zeitleiste bestimmt die Sprecher"]
+        C --> D
+        D --> E["Lokale Nachbearbeitung<br/>Korrektur / Übersetzung<br/>MLX auf dem Gerät"]
+    end
+    D -.-> F["Codex-Pfad (optional)<br/>nur begrenzter Text,<br/>dein Abonnement"]
+    style mac fill:#FDF8EC,stroke:#C2410C,color:#431407
+    linkStyle default stroke:#8B5E3C,stroke-width:1.5px
+    classDef step fill:#FFFFFF,stroke:#B45309,color:#431407
+    classDef opt fill:#F1F5F9,stroke:#64748B,color:#1E293B,stroke-dasharray:4 3
+    class A,B,C,D step
+    class E,F opt
+```
+
+Fehlgeschlagene Blätter werden innerhalb typisierter Grenzen erneut aufgeteilt (mindestens 30 s, Tiefe 3). Nur Ausgaben mit einem Ende-der-Sequenz-Marker werden in das kanonische Transkript übernommen. Der optionale Codex-Pfad sendet begrenzte Transkriptabschnitte, das aktive Glossar und Anweisungen über dein eigenes ChatGPT/Codex-Abonnement. Audio und Dateipfade werden niemals gesendet.
+
+## Modelle
+
+Alle Modelle sind durch Hugging-Face-ID + Revision + Quantisierung festgeschrieben und werden in jedem Ausführungsmanifest protokolliert.
+
+| Rolle | Modell | Revision | Quantisierung |
+|---|---|---|---|
+| ASR (Italienisch / gemischt) | `aufklarer/MOSS-Transcribe-Diarize-0.9B-MLX-INT8` | `90aa6528` | int8-decoder + fp16-audio-vq-kv |
+| ASR (Koreanisch) | `mlx-community/VibeVoice-ASR-8bit` | `725c72e5` | int8 |
+| VAD | `aufklarer/Silero-VAD-v6.2.1-CoreML` | `52387654` | coreml-float16 |
+| Diarisierung | `aufklarer/Pyannote-Community-1-CoreML` | `a14e6c42` | coreml-fp32 |
+| Nachbearbeitung (lokal) | `mlx-community/gemma-4-12B-it-qat-4bit` | `e70c6b3b` | qat-int4 (mlx-vlm 0.6.6) |
+| Nachbearbeitung (remote, nur Text) | `gpt-5.6-sol` über die `codex` CLI | vom Dienst verwaltet | nicht zutreffend |
+
+## Messergebnisse
+
+Alle Ergebnisse stammen aus öffentlichen oder synthetischen Fixtures. Auswertungs-IDs und Artefakt-Hashes sind unter [docs/](docs/) dokumentiert.
+
+| Fixture | Modell | CER | WER | Begriffstrefferquote | Auslassungen | DER |
+|---|---|---:|---:|---:|---:|---:|
+| Koreanischer Dialog, Glossar mit 20 Begriffen | VibeVoice | 0.081 | 0.128 | 0.95 | 0 | — |
+| Italienischer synthetischer Dialog mit 2 Sprechern (10 min), Glossar mit 9 Begriffen | MOSS | 0.033 | 0.081 | 0.78 | 0 | 0.048 |
+| VoxConverse-Beispiel (78 min) | VibeVoice + Pyannote | — | — | — | — | 0.152 |
+
+Stabilität der Sprecher an Abschnittsgrenzen im 78-Minuten-Beispiel: 1.0 für beide Referenzsprecher. Eine feste Matrix von 600 Sekunden zeigte, dass MOSS-Blätter über 120 s ihre Zeitstempelstruktur vollständig verlieren. Deshalb liegt die Obergrenze für produktive Blätter bei 120 s. Einzelheiten stehen unter [docs/moss-long-audio-verdict.md](docs/moss-long-audio-verdict.md).
+
+## Installation
+
+Es gibt noch keine paketierten Releases. Baue das Projekt aus dem Quellcode.
+
+Voraussetzungen: Apple-Silicon-Mac, macOS 26, Xcode 26, [uv](https://docs.astral.sh/uv/).
+
+```bash
+git clone https://github.com/gigio1023/maccheroni.git
+cd maccheroni
+swift build && swift test          # 147 tests
+zsh scripts/build-app.zsh          # builds and codesigns Maccheroni.app
+```
+
+Die App gibt ihren Bundle-Pfad aus, wenn Build, Ressourcen-Allowlist-Inventur und strenge Codesign-Prüfungen erfolgreich sind. Modellgewichte werden bei der ersten Nutzung heruntergeladen; `maccheroni doctor` prüft Laufzeitumgebungen und festgeschriebene Snapshots:
+
+```bash
+.build/debug/maccheroni doctor
+.build/debug/maccheroni run recording.wav --profile it-dialogue
+```
+
+Mitgeliefert werden Profile für koreanische Meetings (`ko-meeting`, VibeVoice) und italienische Dialoge (`it-dialogue`, MOSS). Führe für das optionale lokale Nachbearbeitungsmodell `zsh scripts/setup-postprocess-runtime.zsh` aus.
+
+## Datenschutz
+
+- Transkription, VAD und Diarisierung laufen vollständig lokal. Audiobytes gelangen auf keinen Netzwerkpfad. Tests erzwingen dies, nicht bloß eine Richtlinie.
+- Der optionale Codex-Nachbearbeitungspfad arbeitet ausschließlich mit Text und muss für jeden Lauf aktiviert werden. Er startet `codex exec` in einem leeren temporären Arbeitsbereich mit einer schreibgeschützten Sandbox und isolierter Benutzerkonfiguration. Der Prompt enthält Segmenttext, das aktive Glossar und Anweisungen. Wer stattdessen das lokale MLX-Modell wählt, behält auch den Text auf dem Gerät.
+- Fehlermeldungen werden in ihrer Länge begrenzt und Pfade daraus entfernt, bevor sie in Ausführungsmanifeste gelangen.
+
+## Einschränkungen
+
+- Nur Apple Silicon + macOS 26. Kein Intel, iOS, Windows oder Linux.
+- Nur Nachbearbeitung aufgezeichneter Sprache, keine Live-Untertitel. Diese Entscheidung priorisiert bewusst die Qualität.
+- Die Qualität bei Sprachmischung ist anhand von Fixtures verifiziert, aber noch nicht durch monatelange echte Meetings.
+- Der Codex-Pfad benötigt deine eigene Anmeldung an der Codex CLI und das Kontingent deines Abonnements.
+- Die Benutzeroberfläche ist standardmäßig englisch und bietet 10 Lokalisierungen; ko/it-Zeichenketten sind weiterhin zur menschlichen Prüfung markiert.
+
+## Mitwirken
+
+Issues und gezielte Pull Requests sind willkommen. Build- und Testbefehle, der Verifizierungsstandard hinter den Aussagen in dieser README, Commit-Regeln sowie Konventionen für Issues und PRs stehen in [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Repository-Übersicht
+
+| Pfad | Inhalt |
+|---|---|
+| `Sources/` | Swift-Paket: Core, Preprocess, ASR, Diarize, Merge, Postprocess, CLI, App |
+| `Tests/` | 147 fixturebasierte Tests in 16 Suites |
+| `benchmarks/scripts/` | Runner und Scorer mit abgeleiteten Urteilen und Negativtests |
+| `docs/` | Forschungsübersicht, Quellcodeprüfungen, Richtlinie für Beschränkungen, Verträge (JSON-Schemas), UI-Design |
+| `scripts/` | App-Bundle-Build, MOSS-Harness-Build, Einrichtung der Nachbearbeitungslaufzeit |
+| [PROJECT.md](PROJECT.md) | Absichtshierarchie: Grundsätze, Nicht-Ziele, Entscheidungsregeln, ausschließlich ergänztes Entscheidungsprotokoll |
+| [AGENTS.md](AGENTS.md) | Arbeitskonventionen für dieses Repository |
+
+Jede Abschlussbehauptung in der Dokumentation enthält den Befehl, der sie hervorgebracht hat, und dessen beobachtete Ausgabe.
+
+## Lizenz und Danksagungen
+
+MIT. Dieses Projekt baut auf [speech-swift](https://github.com/soniqo/speech-swift) (MLX/CoreML-Laufzeitumgebungen für Sprache), den Autorinnen und Autoren der Modelle MOSS, VibeVoice, Silero und pyannote sowie [mlx](https://github.com/ml-explore/mlx) auf. Die Quellcodeprüfung der Referenzprojekte unter `docs/` würdigt die 24 Open-Source-Projekte, deren gute wie schlechte Entwurfsentscheidungen dieses Projekt geprägt haben.

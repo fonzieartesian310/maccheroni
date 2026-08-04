@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maccheroni.local/schemas/segments.schema.json",
+  "title": "Maccheroni speaker-attributed segments",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "segments",
+    "num_speakers",
+    "source"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "segments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/segment"
+      }
+    },
+    "num_speakers": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "source": {
+      "$ref": "#/$defs/source"
+    }
+  },
+  "$defs": {
+    "segment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "speaker",
+        "start_s",
+        "end_s",
+        "text"
+      ],
+      "properties": {
+        "speaker": {
+          "type": "string",
+          "minLength": 1
+        },
+        "start_s": {
+          "type": "number",
+          "minimum": 0
+        },
+        "end_s": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "language": {
+          "type": "string",
+          "pattern": "^[A-Za-z]{2,3}([_-][A-Za-z0-9]{2,8})*$"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "flags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]*$"
+          }
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file_name",
+        "sha256",
+        "duration_s"
+      ],
+      "properties": {
+        "file_name": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^/\\\\]+$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "duration_s": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "model": {
+    "hf_id": "FluidInference/speaker-diarization-coreml",
+    "revision": "1ed7a662fdc7109e36d822db793ee6eebdaf8594",
+    "quantization": "CoreML storage: segmentation/FBank/PLDA Float32, embedding Float16"
+  },
+  "audio": { "duration_s": 28.8898125 },
+  "segments": [
+    {
+      "speaker": "S2",
+      "start_s": 0.0,
+      "end_s": 3.2,
+      "raw_start_s": 0.0,
+      "raw_end_s": 3.2,
+      "quality_score": 1.0
+    },
+    {
+      "speaker": "S1",
+      "start_s": 3.7,
+      "end_s": 28.8,
+      "raw_start_s": 3.7,
+      "raw_end_s": 28.8,
+      "quality_score": 0.9
+    }
+  ]
+}

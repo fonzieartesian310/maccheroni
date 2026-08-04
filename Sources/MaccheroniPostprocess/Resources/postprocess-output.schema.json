@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Maccheroni postprocess output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["proposals"],
+  "properties": {
+    "proposals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["segment_index", "replacement_text", "disposition", "reason"],
+        "properties": {
+          "segment_index": { "type": "integer", "minimum": 0 },
+          "replacement_text": { "type": "string", "minLength": 1 },
+          "disposition": { "type": "string", "enum": ["apply", "review"] },
+          "reason": { "type": "string" }
+        }
+      }
+    }
+  }
+}

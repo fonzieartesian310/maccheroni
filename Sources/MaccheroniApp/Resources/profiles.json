@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0.0",
+  "profiles": [
+    {
+      "id": "ko-it-meeting",
+      "cliProfile": "ko-it-meeting",
+      "asrBackend": "vibevoice",
+      "languagePin": "auto",
+      "diarizationBackend": "community1",
+      "languageCoverage": ["ko", "en", "it", "multilingual"],
+      "models": [
+        {
+          "role": "asr",
+          "hf_model_id": "mlx-community/VibeVoice-ASR-8bit",
+          "revision": "725c72e54d6ef875472c27fbc50fab470a960940",
+          "quantization": "int8"
+        },
+        {
+          "role": "diarization",
+          "hf_model_id": "aufklarer/Pyannote-Community-1-CoreML",
+          "revision": "a14e6c420d56e8472850649b016a486fd0acbe81",
+          "quantization": "coreml-fp32"
+        }
+      ],
+      "benchmarkSource": "docs/benchmark-verdict.md",
+      "metrics": [
+        { "key": "cer", "value": 0.08123249299719888, "display": "CER 0.081" },
+        { "key": "wer", "value": 0.1282051282051282, "display": "WER 0.128" },
+        { "key": "term_recall", "value": 0.95, "display": "Term recall 0.950" }
+      ]
+    },
+    {
+      "id": "it-dialogue",
+      "cliProfile": "it-dialogue",
+      "asrBackend": "moss",
+      "languagePin": "it",
+      "diarizationBackend": "community1",
+      "languageCoverage": ["it"],
+      "models": [
+        {
+          "role": "asr",
+          "hf_model_id": "aufklarer/MOSS-Transcribe-Diarize-0.9B-MLX-INT8",
+          "revision": "90aa65287111a327db98eb83e325bd5332945edd",
+          "quantization": "int8-decoder+fp16-audio-vq-kv"
+        },
+        {
+          "role": "diarization",
+          "hf_model_id": "aufklarer/Pyannote-Community-1-CoreML",
+          "revision": "a14e6c420d56e8472850649b016a486fd0acbe81",
+          "quantization": "coreml-fp32"
+        }
+      ],
+      "benchmarkSource": "docs/benchmark-verdict.md",
+      "metrics": [
+        { "key": "cer", "value": 0.033112582781456956, "display": "CER 0.033" },
+        { "key": "wer", "value": 0.08064516129032258, "display": "WER 0.081" },
+        { "key": "term_recall", "value": 0.7777777777777778, "display": "Term recall 0.778" },
+        { "key": "backchannels", "value": 1, "display": "Backchannels 7/7" }
+      ]
+    },
+    {
+      "id": "en-meeting",
+      "cliProfile": "en-meeting",
+      "asrBackend": "vibevoice",
+      "languagePin": "en",
+      "diarizationBackend": "community1",
+      "languageCoverage": ["en"],
+      "models": [
+        {
+          "role": "asr",
+          "hf_model_id": "mlx-community/VibeVoice-ASR-8bit",
+          "revision": "725c72e54d6ef875472c27fbc50fab470a960940",
+          "quantization": "int8"
+        },
+        {
+          "role": "diarization",
+          "hf_model_id": "aufklarer/Pyannote-Community-1-CoreML",
+          "revision": "a14e6c420d56e8472850649b016a486fd0acbe81",
+          "quantization": "coreml-fp32"
+        }
+      ],
+      "benchmarkSource": null,
+      "metrics": []
+    },
+    {
+      "id": "automatic",
+      "cliProfile": "automatic",
+      "asrBackend": "vibevoice",
+      "languagePin": "auto",
+      "diarizationBackend": "community1",
+      "languageCoverage": ["multilingual"],
+      "models": [
+        {
+          "role": "asr",
+          "hf_model_id": "mlx-community/VibeVoice-ASR-8bit",
+          "revision": "725c72e54d6ef875472c27fbc50fab470a960940",
+          "quantization": "int8"
+        },
+        {
+          "role": "diarization",
+          "hf_model_id": "aufklarer/Pyannote-Community-1-CoreML",
+          "revision": "a14e6c420d56e8472850649b016a486fd0acbe81",
+          "quantization": "coreml-fp32"
+        }
+      ],
+      "benchmarkSource": null,
+      "metrics": []
+    }
+  ]
+}

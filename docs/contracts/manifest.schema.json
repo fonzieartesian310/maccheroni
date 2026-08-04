@@ -1,0 +1,792 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maccheroni.local/schemas/manifest.schema.json",
+  "title": "Maccheroni run manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "status",
+    "input",
+    "backend",
+    "models",
+    "glossary",
+    "preprocessing",
+    "coverage",
+    "chunk_boundaries",
+    "timing",
+    "artifacts",
+    "failure"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "status": {
+      "enum": [
+        "succeeded",
+        "partial",
+        "failed"
+      ]
+    },
+    "input": {
+      "$ref": "#/$defs/input"
+    },
+    "backend": {
+      "$ref": "#/$defs/backend"
+    },
+    "models": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/model"
+      }
+    },
+    "glossary": {
+      "$ref": "#/$defs/glossary"
+    },
+    "preprocessing": {
+      "$ref": "#/$defs/preprocessing"
+    },
+    "coverage": {
+      "$ref": "#/$defs/coverage"
+    },
+    "chunk_boundaries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/chunk"
+      }
+    },
+    "timing": {
+      "$ref": "#/$defs/timing"
+    },
+    "peak_memory_bytes": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/artifact"
+      }
+    },
+    "failure": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    },
+    "postprocess": {
+      "$ref": "#/$defs/postprocess"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "succeeded"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "failure": {
+            "type": "null"
+          },
+          "coverage": {
+            "properties": {
+              "truncated": {
+                "const": false
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "failure": {
+            "$ref": "#/$defs/failure"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "coverage": {
+            "properties": {
+              "truncated": {
+                "const": true
+              }
+            },
+            "required": [
+              "truncated"
+            ]
+          }
+        },
+        "required": [
+          "coverage"
+        ]
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "enum": [
+              "partial",
+              "failed"
+            ]
+          },
+          "coverage": {
+            "required": [
+              "message"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file_name",
+        "sha256",
+        "size_bytes"
+      ],
+      "properties": {
+        "file_name": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^/\\\\]+$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "backend": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "version"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "postprocess": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "backend",
+        "model_id",
+        "model_revision",
+        "quantization",
+        "input_mode",
+        "glossary_sha256"
+      ],
+      "properties": {
+        "backend": {
+          "$ref": "#/$defs/backend"
+        },
+        "model_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_revision": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "quantization": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._+-]*$"
+        },
+        "input_mode": {
+          "const": "text-only"
+        },
+        "glossary_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "mode": {
+          "enum": [
+            "correction",
+            "translation"
+          ]
+        },
+        "target_language": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$"
+        },
+        "source_segments_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "batching": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/postprocess_batching"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "translation"
+              }
+            },
+            "required": [
+              "mode"
+            ]
+          },
+          "then": {
+            "required": [
+              "target_language",
+              "source_segments_sha256",
+              "batching"
+            ],
+            "properties": {
+              "target_language": {
+                "type": "string",
+                "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$"
+              },
+              "source_segments_sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "batching": {
+                "$ref": "#/$defs/postprocess_batching"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "correction"
+              }
+            },
+            "required": [
+              "mode"
+            ]
+          },
+          "then": {
+            "properties": {
+              "target_language": {
+                "type": "null"
+              },
+              "source_segments_sha256": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "postprocess_batching": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "maximum_prompt_utf8_bytes",
+        "maximum_segments_per_batch",
+        "maximum_output_tokens",
+        "output_token_limit_status",
+        "output_token_planning_budget",
+        "output_tokens_per_input_utf8_byte_permille",
+        "base_output_token_reserve",
+        "per_segment_output_token_reserve",
+        "batches_planned",
+        "maximum_observed_prompt_utf8_bytes",
+        "maximum_observed_input_text_utf8_bytes",
+        "maximum_observed_estimated_output_tokens",
+        "maximum_observed_output_text_utf8_bytes",
+        "maximum_observed_response_utf8_bytes",
+        "maximum_observed_accepted_output_token_upper_bound"
+      ],
+      "properties": {
+        "maximum_prompt_utf8_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maximum_segments_per_batch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maximum_output_tokens": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "output_token_limit_status": {
+          "enum": [
+            "configured",
+            "service-managed-unavailable"
+          ]
+        },
+        "output_token_planning_budget": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "output_tokens_per_input_utf8_byte_permille": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "base_output_token_reserve": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "per_segment_output_token_reserve": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "batches_planned": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maximum_observed_prompt_utf8_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maximum_observed_input_text_utf8_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maximum_observed_estimated_output_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maximum_observed_output_text_utf8_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maximum_observed_response_utf8_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maximum_observed_accepted_output_token_upper_bound": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "output_token_limit_status": {
+                "const": "configured"
+              }
+            },
+            "required": [
+              "output_token_limit_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "maximum_output_tokens": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "output_token_limit_status": {
+                "const": "service-managed-unavailable"
+              }
+            },
+            "required": [
+              "output_token_limit_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "maximum_output_tokens": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "hf_model_id",
+        "revision",
+        "quantization"
+      ],
+      "properties": {
+        "role": {
+          "enum": [
+            "asr",
+            "diarization",
+            "alignment",
+            "vad",
+            "enhancement",
+            "postprocess"
+          ]
+        },
+        "hf_model_id": {
+          "type": "string",
+          "pattern": "^[^/\\s]+/[^/\\s]+$"
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "quantization": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._+-]*$"
+        }
+      }
+    },
+    "glossary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provided",
+        "sha256",
+        "item_count",
+        "injection_mode",
+        "applied"
+      ],
+      "properties": {
+        "provided": {
+          "type": "boolean"
+        },
+        "sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "item_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "injection_mode": {
+          "enum": [
+            "none",
+            "free_text_context",
+            "hotword_instruction",
+            "ctc_vocabulary"
+          ]
+        },
+        "applied": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "provided": {
+                "const": false
+              }
+            },
+            "required": [
+              "provided"
+            ]
+          },
+          "then": {
+            "properties": {
+              "sha256": {
+                "type": "null"
+              },
+              "item_count": {
+                "const": 0
+              },
+              "injection_mode": {
+                "const": "none"
+              },
+              "applied": {
+                "const": false
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "item_count": {
+                "minimum": 1
+              },
+              "injection_mode": {
+                "enum": [
+                  "free_text_context",
+                  "hotword_instruction",
+                  "ctc_vocabulary"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "preprocessing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sample_rate_hz",
+        "channels",
+        "peak_normalization",
+        "vad",
+        "enhancement"
+      ],
+      "properties": {
+        "sample_rate_hz": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "channels": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "peak_normalization": {
+          "type": "boolean"
+        },
+        "vad": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "enabled",
+            "backend"
+          ],
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "backend": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "enhancement": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "enabled",
+            "backend"
+          ],
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "backend": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "input_duration_s",
+        "processed_duration_s",
+        "truncated",
+        "strategy",
+        "chunks_planned",
+        "chunks_completed"
+      ],
+      "properties": {
+        "input_duration_s": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "processed_duration_s": {
+          "type": "number",
+          "minimum": 0
+        },
+        "truncated": {
+          "type": "boolean"
+        },
+        "strategy": {
+          "enum": [
+            "full",
+            "chunked",
+            "rejected",
+            "backend_truncated"
+          ]
+        },
+        "chunks_planned": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "chunks_completed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "chunk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "index",
+        "start_s",
+        "end_s",
+        "status"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "start_s": {
+          "type": "number",
+          "minimum": 0
+        },
+        "end_s": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "status": {
+          "enum": [
+            "planned",
+            "succeeded",
+            "failed",
+            "skipped"
+          ]
+        }
+      }
+    },
+    "timing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "started_at",
+        "finished_at",
+        "wall_time_s"
+      ],
+      "properties": {
+        "started_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "finished_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "wall_time_s": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]*$"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

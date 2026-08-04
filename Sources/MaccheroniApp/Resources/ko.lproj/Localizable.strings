@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>%@ %@</key>
+	<string>%@ %@</string>
+	<key>%@, %@</key>
+	<string>%@, %@</string>
+	<key>%lld percent</key>
+	<string>%lld퍼센트</string>
+	<key>%lld segments, %lld speakers</key>
+	<string>세그먼트 %lld개, 화자 %lld명</string>
+	<key>%lld unresolved</key>
+	<string>미해결 %lld개</string>
+	<key>%lld/%lld chunks</key>
+	<string>청크 %lld/%lld</string>
+	<key>+</key>
+	<string>+</string>
+	<key>A recording is already in progress.</key>
+	<string>이미 녹음이 진행 중입니다.</string>
+	<key>A run artifact failed its integrity check: %@</key>
+	<string>실행 아티팩트가 무결성 검사에 실패했습니다: %@</string>
+	<key>A run artifact is missing: %@</key>
+	<string>실행 아티팩트가 누락되었습니다: %@</string>
+	<key>Add</key>
+	<string>추가</string>
+	<key>Add a name, term, or place</key>
+	<string>이름, 용어, 장소 추가</string>
+	<key>Ambiguous Speaker</key>
+	<string>모호한 화자</string>
+	<key>An identical retry is disabled because it would use the same model, glossary, and chunk policy.</key>
+	<string>동일한 모델, 용어집, 청크 정책을 사용하므로 같은 설정으로 다시 시도할 수 없습니다.</string>
+	<key>App Language</key>
+	<string>앱 언어</string>
+	<key>Applied</key>
+	<string>적용됨</string>
+	<key>Audio never leaves this Mac.</key>
+	<string>오디오는 이 Mac 밖으로 전송되지 않습니다.</string>
+	<key>Automatic</key>
+	<string>자동</string>
+	<key>Backchannels</key>
+	<string>맞장구</string>
+	<key>Backend</key>
+	<string>백엔드</string>
+	<key>Both recording channels were empty; the combined recording was retained but cannot be transcribed.</key>
+	<string>두 녹음 채널 모두 비어 있습니다. 결합 녹음은 보존했지만 전사할 수 없습니다.</string>
+	<key>Cancel</key>
+	<string>취소</string>
+	<key>Cancel Transcription</key>
+	<string>전사 취소</string>
+	<key>Cancelled</key>
+	<string>취소됨</string>
+	<key>Cancelling keeps completed chunks and intermediate artifacts.</key>
+	<string>취소하면 완료된 청크와 중간 아티팩트가 유지됩니다.</string>
+	<key>Capture a Conversation</key>
+	<string>대화 캡처</string>
+	<key>Captured audio has no readable format description.</key>
+	<string>캡처한 오디오에는 읽을 수 있는 형식 설명이 없습니다.</string>
+	<key>Category</key>
+	<string>분류</string>
+	<key>Channels</key>
+	<string>채널</string>
+	<key>Chinese, Simplified</key>
+	<string>중국어, 간체</string>
+	<key>Choose Audio File…</key>
+	<string>오디오 파일 선택…</string>
+	<key>Chunk %lld of %lld</key>
+	<string>청크 %lld/%lld</string>
+	<key>Codex</key>
+	<string>Codex</string>
+	<key>Codex post-processing sends transcript text only. The original audio and raw transcript stay unchanged.</key>
+	<string>Codex 후처리는 전사문 텍스트만 보냅니다. 원본 오디오와 원시 전사문은 그대로 유지됩니다.</string>
+	<key>Complete</key>
+	<string>완료</string>
+	<key>Could not access captured audio samples (status %lld).</key>
+	<string>캡처된 오디오 샘플에 액세스할 수 없습니다(상태 %lld).</string>
+	<key>Could not allocate canonical PCM buffer.</key>
+	<string>표준 PCM 버퍼를 할당할 수 없습니다.</string>
+	<key>Could not convert captured PCM (status %lld).</key>
+	<string>캡처된 PCM을 변환할 수 없습니다(상태 %lld).</string>
+	<key>Could not convert microphone audio to canonical PCM.</key>
+	<string>마이크 오디오를 표준 PCM으로 변환할 수 없습니다.</string>
+	<key>Could not convert system audio to canonical PCM.</key>
+	<string>시스템 오디오를 표준 PCM으로 변환할 수 없습니다.</string>
+	<key>Could not copy captured audio samples (status %lld).</key>
+	<string>캡처한 오디오 샘플을 복사할 수 없습니다(상태 %lld).</string>
+	<key>Could not create a PCM buffer for captured audio.</key>
+	<string>캡처된 오디오에 대한 PCM 버퍼를 생성할 수 없습니다.</string>
+	<key>Could not read recording artifact %@.</key>
+	<string>녹음 아티팩트 %@을(를) 읽을 수 없습니다.</string>
+	<key>Coverage</key>
+	<string>적용 범위</string>
+	<key>Current Model</key>
+	<string>현재 모델</string>
+	<key>Default Post-processing</key>
+	<string>기본 후처리</string>
+	<key>Disk Use</key>
+	<string>디스크 사용</string>
+	<key>Done</key>
+	<string>완료</string>
+	<key>Download Pinned Model…</key>
+	<string>고정 버전 모델 다운로드…</string>
+	<key>Download Pinned Model</key>
+	<string>고정 버전 모델 다운로드</string>
+	<key>Drop an audio file here</key>
+	<string>여기에 오디오 파일을 드롭하세요.</string>
+	<key>Edit Glossary</key>
+	<string>용어집 편집</string>
+	<key>Elapsed</key>
+	<string>경과 시간</string>
+	<key>English</key>
+	<string>영어</string>
+	<key>English Meeting</key>
+	<string>영어 회의</string>
+	<key>English is the default. A manual choice applies to Maccheroni without changing the Mac system language.</key>
+	<string>영어가 기본입니다. Mac 시스템 언어를 바꾸지 않고 Maccheroni에서 언어를 직접 선택할 수 있습니다.</string>
+	<key>Enhancement</key>
+	<string>음질 개선</string>
+	<key>Export</key>
+	<string>내보내기</string>
+	<key>Failed</key>
+	<string>실패</string>
+	<key>Failure Details</key>
+	<string>실패 세부 정보</string>
+	<key>French</key>
+	<string>프랑스어</string>
+	<key>General</key>
+	<string>일반</string>
+	<key>German</key>
+	<string>독일어</string>
+	<key>Glossaries</key>
+	<string>용어집</string>
+	<key>Glossary</key>
+	<string>용어집</string>
+	<key>Glossary Could Not Be Saved</key>
+	<string>용어집을 저장할 수 없습니다.</string>
+	<key>Has Conflicts</key>
+	<string>충돌 있음</string>
+	<key>Import Audio</key>
+	<string>오디오 가져오기</string>
+	<key>Import Audio…</key>
+	<string>오디오 가져오기…</string>
+	<key>Import an audio file for transcription.</key>
+	<string>전사를 위해 오디오 파일을 가져옵니다.</string>
+	<key>Injection Mode</key>
+	<string>주입 모드</string>
+	<key>Input Integrity</key>
+	<string>입력 무결성</string>
+	<key>Inspect the preserved run. For a new attempt, choose a different profile or transcribe a shorter copy. The original recording stays unchanged.</key>
+	<string>보존된 실행을 확인하세요. 새로 시도하려면 다른 프로필을 선택하거나 더 짧은 사본을 전사하세요. 원본 녹음은 그대로 유지됩니다.</string>
+	<key>Installed</key>
+	<string>설치됨</string>
+	<key>Italian</key>
+	<string>이탈리아어</string>
+	<key>Italian Dialogue</key>
+	<string>이탈리아어 대화</string>
+	<key>Items</key>
+	<string>항목</string>
+	<key>Japanese</key>
+	<string>일본어</string>
+	<key>Korean</key>
+	<string>한국어</string>
+	<key>Korean IT Meeting</key>
+	<string>한국어 IT 회의</string>
+	<key>Language</key>
+	<string>언어</string>
+	<key>Languages</key>
+	<string>언어</string>
+	<key>Leave Unresolved</key>
+	<string>미해결 상태로 두기</string>
+	<key>Library</key>
+	<string>라이브러리</string>
+	<key>Local</key>
+	<string>로컬</string>
+	<key>Local Library</key>
+	<string>로컬 라이브러리</string>
+	<key>Maccheroni Could Not Start</key>
+	<string>Maccheroni를 시작할 수 없습니다.</string>
+	<key>Maccheroni Needs Attention</key>
+	<string>Maccheroni를 확인해 주세요</string>
+	<key>Maccheroni could not find a display whose system audio can be captured.</key>
+	<string>Maccheroni는 시스템 오디오를 캡처할 수 있는 디스플레이를 찾을 수 없습니다.</string>
+	<key>Maccheroni is processing the full recording locally.</key>
+	<string>Maccheroni는 전체 녹음을 로컬에서 처리하고 있습니다.</string>
+	<key>Maccheroni never deletes or overwrites recordings, raw transcripts, or completed run artifacts. Model removal uses the macOS Trash.</key>
+	<string>Maccheroni는 녹음, 원시 전사문, 완료된 실행 산출물을 삭제하거나 덮어쓰지 않습니다. 모델을 제거하면 macOS 휴지통으로 이동합니다.</string>
+	<key>Maccheroni will not overwrite an existing recording artifact: %@.</key>
+	<string>Maccheroni는 기존 녹음 아티팩트 %@을(를) 덮어쓰지 않습니다.</string>
+	<key>Markdown</key>
+	<string>Markdown</string>
+	<key>Merging</key>
+	<string>병합</string>
+	<key>Microphone</key>
+	<string>마이크</string>
+	<key>Models</key>
+	<string>모델</string>
+	<key>Move Model to Trash</key>
+	<string>모델을 휴지통으로 이동</string>
+	<key>New Recording</key>
+	<string>새 녹음</string>
+	<key>No</key>
+	<string>아니요</string>
+	<key>No cloud service is selected by default. Audio never leaves this Mac; Codex receives transcript text only when explicitly selected.</key>
+	<string>기본값은 클라우드 서비스 없음입니다. 오디오는 이 Mac 밖으로 전송되지 않습니다. Codex를 직접 선택한 경우에만 전사문 텍스트를 보냅니다.</string>
+	<key>No local benchmark is available for this profile yet.</key>
+	<string>아직 이 프로필에 사용할 수 있는 로컬 벤치마크가 없습니다.</string>
+	<key>None</key>
+	<string>없음</string>
+	<key>Not Installed</key>
+	<string>설치되지 않음</string>
+	<key>OK</key>
+	<string>확인</string>
+	<key>Off</key>
+	<string>끔</string>
+	<key>On</key>
+	<string>켬</string>
+	<key>Open the capture view.</key>
+	<string>캡처 보기를 엽니다.</string>
+	<key>Original File</key>
+	<string>원본 파일</string>
+	<key>Overlapping Speech</key>
+	<string>겹치는 음성</string>
+	<key>Peak Normalization</key>
+	<string>피크 정규화</string>
+	<key>People</key>
+	<string>인물</string>
+	<key>Pipeline</key>
+	<string>파이프라인</string>
+	<key>Places</key>
+	<string>장소</string>
+	<key>Portuguese</key>
+	<string>포르투갈어</string>
+	<key>Post-processing</key>
+	<string>후처리</string>
+	<key>Preparing</key>
+	<string>준비 중</string>
+	<key>Preparing Maccheroni…</key>
+	<string>Maccheroni 준비 중…</string>
+	<key>Preprocessing</key>
+	<string>전처리</string>
+	<key>Primary Model</key>
+	<string>주 모델</string>
+	<key>Profile</key>
+	<string>프로필</string>
+	<key>Provided</key>
+	<string>제공됨</string>
+	<key>Quantization</key>
+	<string>양자화</string>
+	<key>Ready to Transcribe</key>
+	<string>전사 준비 완료</string>
+	<key>Record microphone and system audio as separate local originals, or import an existing audio file.</key>
+	<string>마이크와 시스템 오디오를 별도의 로컬 원본으로 녹음하거나 기존 오디오 파일을 가져옵니다.</string>
+	<key>Recorded</key>
+	<string>녹음됨</string>
+	<key>Recording</key>
+	<string>녹음</string>
+	<key>Recording %@</key>
+	<string>%@ 녹음 중</string>
+	<key>Recording Not Found</key>
+	<string>녹음을 찾을 수 없습니다</string>
+	<key>Recording artifact %@ is not canonical 48 kHz mono PCM.</key>
+	<string>녹음 아티팩트 %@은(는) 표준 48kHz 모노 PCM이 아닙니다.</string>
+	<key>Recording failed: %@</key>
+	<string>녹음 실패: %@</string>
+	<key>Recordings</key>
+	<string>녹음 목록</string>
+	<key>Remove</key>
+	<string>삭제</string>
+	<key>Remove %@</key>
+	<string>%@ 삭제</string>
+	<key>Rename Speaker</key>
+	<string>화자 이름 바꾸기</string>
+	<key>Rename this speaker everywhere in the corrected transcript.</key>
+	<string>수정 전사문의 모든 위치에서 이 화자 이름을 바꿉니다.</string>
+	<key>Resolved</key>
+	<string>해결됨</string>
+	<key>Reveal</key>
+	<string>Finder에서 보기</string>
+	<key>Reveal Original in Finder</key>
+	<string>Finder에서 원본 보기</string>
+	<key>Reveal Preserved Run</key>
+	<string>보존된 실행 보기</string>
+	<key>Reveal Run in Finder</key>
+	<string>Finder에서 실행 보기</string>
+	<key>Reveal in Finder</key>
+	<string>Finder에서 보기</string>
+	<key>Review Profiles</key>
+	<string>프로필 검토</string>
+	<key>Review Uncertain Transcript</key>
+	<string>불확실한 전사문 검토</string>
+	<key>Revision</key>
+	<string>리비전</string>
+	<key>Run</key>
+	<string>실행</string>
+	<key>Run Could Not Be Opened</key>
+	<string>실행을 열 수 없습니다</string>
+	<key>Run ID</key>
+	<string>실행 ID</string>
+	<key>Run Inspector</key>
+	<string>실행 인스펙터</string>
+	<key>Run Output</key>
+	<string>실행 출력</string>
+	<key>Russian</key>
+	<string>러시아어</string>
+	<key>SHA-256</key>
+	<string>SHA-256</string>
+	<key>SRT Subtitles</key>
+	<string>SRT 자막</string>
+	<key>Same-settings retry unavailable</key>
+	<string>동일 설정으로 다시 시도할 수 없음</string>
+	<key>Sample Rate</key>
+	<string>샘플링 속도</string>
+	<key>Save</key>
+	<string>저장</string>
+	<key>Segment %lld does not have a valid SRT time range.</key>
+	<string>세그먼트 %lld에 유효한 SRT 시간 범위가 없습니다.</string>
+	<key>Segments JSON</key>
+	<string>세그먼트 JSON</string>
+	<key>Settings Could Not Be Loaded</key>
+	<string>설정을 로드할 수 없습니다</string>
+	<key>Show or hide exact run and model details.</key>
+	<string>정확한 실행 및 모델 세부정보를 표시하거나 숨깁니다.</string>
+	<key>Size</key>
+	<string>크기</string>
+	<key>Spanish</key>
+	<string>스페인어</string>
+	<key>Speaker Diarization</key>
+	<string>화자 분리</string>
+	<key>Speaker name</key>
+	<string>화자 이름</string>
+	<key>Start Recording</key>
+	<string>녹음 시작</string>
+	<key>Starts separate microphone and system audio capture.</key>
+	<string>별도의 마이크 및 시스템 오디오 캡처를 시작합니다.</string>
+	<key>Status</key>
+	<string>상태</string>
+	<key>Stop Recording</key>
+	<string>녹음 중지</string>
+	<key>Stop the active recording before importing audio.</key>
+	<string>진행 중인 녹음을 중지한 뒤 오디오를 가져오세요.</string>
+	<key>Stop the active recording before starting transcription.</key>
+	<string>진행 중인 녹음을 중지한 뒤 전사를 시작하세요.</string>
+	<key>Stops capture and begins transcription.</key>
+	<string>캡처를 중지하고 전사를 시작합니다.</string>
+	<key>Storage</key>
+	<string>저장 공간</string>
+	<key>System Audio</key>
+	<string>시스템 오디오</string>
+	<key>Term Recall</key>
+	<string>용어 재현율</string>
+	<key>Terms</key>
+	<string>용어</string>
+	<key>The Maccheroni command-line engine is missing.</key>
+	<string>Maccheroni 명령줄 엔진이 없습니다.</string>
+	<key>The Hugging Face %@ command failed (exit %lld): %@</key>
+	<string>Hugging Face %@ 명령이 실패했습니다(종료 코드 %lld): %@</string>
+	<key>The Hugging Face command finished, but the pinned model location is missing: %@</key>
+	<string>Hugging Face 명령이 완료되었지만 고정된 모델 위치가 없습니다: %@</string>
+	<key>The Hugging Face command-line tool (hf) is not installed. Install it, then try again.</key>
+	<string>Hugging Face 명령줄 도구(hf)가 설치되어 있지 않습니다. 설치한 뒤 다시 시도하세요.</string>
+	<key>The Hugging Face command-line tool could not start: %@</key>
+	<string>Hugging Face 명령줄 도구를 시작할 수 없습니다: %@</string>
+	<key>The bundled profile registry is missing.</key>
+	<string>번들 프로필 레지스트리가 누락되었습니다.</string>
+	<key>The derived combined recording could not be read after writing: %@.</key>
+	<string>%@을(를) 쓴 후에 파생된 결합 녹음을 읽을 수 없습니다.</string>
+	<key>The exported speaker name is empty for segment %lld.</key>
+	<string>세그먼트 %lld의 내보낼 화자 이름이 비어 있습니다.</string>
+	<key>The exported text is empty for segment %lld.</key>
+	<string>세그먼트 %lld에 대해 내보낸 텍스트가 비어 있습니다.</string>
+	<key>The library entry is no longer available.</key>
+	<string>라이브러리 항목을 더 이상 사용할 수 없습니다.</string>
+	<key>The original audio and completed artifacts were preserved. You can inspect the run or try again.</key>
+	<string>원본 오디오와 완료된 산출물을 보존했습니다. 실행을 확인하거나 다시 시도할 수 있습니다.</string>
+	<key>The original audio and completed attempt artifacts were preserved. MOSS still reached its output limit after the failed range was split into smaller chunks.</key>
+	<string>원본 오디오와 완료된 시도 아티팩트가 보존되었습니다. 실패한 범위를 더 작은 청크로 나눈 뒤에도 MOSS가 출력 한도에 도달했습니다.</string>
+	<key>The original audio and every completed intermediate artifact were preserved.</key>
+	<string>원본 오디오와 완성된 모든 중간 아티팩트가 보존되었습니다.</string>
+	<key>The original audio is not available.</key>
+	<string>원본 오디오를 사용할 수 없습니다.</string>
+	<key>The profile registry is invalid: %@</key>
+	<string>프로필 레지스트리가 잘못되었습니다: %@</string>
+	<key>The raw run remains on disk, but one or more required artifacts failed an integrity check.</key>
+	<string>원시 실행은 디스크에 남아 있지만 필수 산출물 하나 이상이 무결성 검사에 실패했습니다.</string>
+	<key>The recording artifact name is unsafe: %@.</key>
+	<string>녹음 아티팩트 이름이 안전하지 않습니다: %@.</string>
+	<key>The recording is preserved and ready for the selected profile.</key>
+	<string>녹음을 보존했으며 선택한 프로필로 전사할 준비가 되었습니다.</string>
+	<key>The run contains an unsafe artifact path: %@</key>
+	<string>실행에 안전하지 않은 아티팩트 경로가 포함되어 있습니다: %@</string>
+	<key>The run did not succeed.</key>
+	<string>실행이 성공하지 못했습니다.</string>
+	<key>The selected file has no readable audio duration.</key>
+	<string>선택한 파일에는 읽을 수 있는 오디오 지속 시간이 없습니다.</string>
+	<key>The transcription engine could not start: %@</key>
+	<string>전사 엔진을 시작할 수 없습니다: %@</string>
+	<key>The transcription engine exited with status %lld.</key>
+	<string>전사 엔진이 상태 %lld로 종료되었습니다.</string>
+	<key>The transcription engine finished without a run directory.</key>
+	<string>실행 디렉터리 없이 전사 엔진이 완료되었습니다.</string>
+	<key>There is no active recording.</key>
+	<string>활성 녹음이 없습니다.</string>
+	<key>This name applies to every %@ segment in corrected exports.</key>
+	<string>이 이름은 수정된 내보내기의 모든 %@ 세그먼트에 적용됩니다.</string>
+	<key>This run reached the MOSS output limit after bounded splitting. Choose a different profile or use a shorter copy before retrying.</key>
+	<string>이 실행은 제한된 분할 처리 후에도 MOSS 출력 한도에 도달했습니다. 다른 프로필을 선택하거나 더 짧은 사본을 사용한 후 다시 시도하세요.</string>
+	<key>This segment was marked uncertain by the pipeline.</key>
+	<string>이 세그먼트는 파이프라인에서 불확실하다고 표시되었습니다.</string>
+	<key>Transcribing</key>
+	<string>전사하는 중</string>
+	<key>Transcript</key>
+	<string>전사문</string>
+	<key>Transcript Could Not Be Exported</key>
+	<string>전사문을 내보낼 수 없습니다</string>
+	<key>Transcript Disagreement</key>
+	<string>전사문 불일치</string>
+	<key>Transcription</key>
+	<string>전사</string>
+	<key>Transcription Cancelled</key>
+	<string>전사가 취소되었습니다.</string>
+	<key>Transcription Failed</key>
+	<string>전사 실패</string>
+	<key>Transcription Limit Reached</key>
+	<string>전사 한도에 도달했습니다</string>
+	<key>Transcription and the selected post-processing path run locally. The original audio and raw transcript stay unchanged.</key>
+	<string>전사와 선택한 후처리는 로컬에서 실행합니다. 원본 오디오와 원시 전사문은 그대로 유지됩니다.</string>
+	<key>Truncated</key>
+	<string>잘림</string>
+	<key>Try Again</key>
+	<string>다시 시도</string>
+	<key>Uncertain</key>
+	<string>불확실</string>
+	<key>Use System Language</key>
+	<string>시스템 언어 사용</string>
+	<key>Verification Model %lld</key>
+	<string>검증 모델 %lld</string>
+	<key>Voice Activity Detection</key>
+	<string>음성 활동 감지</string>
+	<key>Wait for the active transcription to finish.</key>
+	<string>활성 전사가 완료될 때까지 기다립니다.</string>
+	<key>Wall Time</key>
+	<string>처리 시간</string>
+	<key>Yes</key>
+	<string>예</string>
+	<key>Your selection is stored as a correction beside the immutable raw transcript.</key>
+	<string>선택한 내용은 변경할 수 없는 원시 전사문과 별도의 교정으로 저장됩니다.</string>
+	<key>•</key>
+	<string>•</string>
+	<key>%lld bytes</key>
+	<string>%lld바이트</string>
+	<key>A new setup selects Codex only when its CLI is signed in; otherwise it selects Local. Codex receives transcript text only. Audio never leaves this Mac.</key>
+	<string>새로 설정하면 Codex CLI에 로그인한 경우에만 Codex를 선택합니다. 그렇지 않으면 Local을 선택합니다. Codex는 전사문 텍스트만 받습니다. 오디오는 이 Mac을 떠나지 않습니다.</string>
+	<key>Audio stays on this Mac. Transcription runs locally; Codex receives transcript text only during post-processing.</key>
+	<string>오디오는 이 Mac에 남습니다. 전사는 로컬에서 실행되며 Codex는 후처리할 때만 전사문 텍스트를 받습니다.</string>
+	<key>Batches Planned</key>
+	<string>예정 배치 수</string>
+	<key>Check Again</key>
+	<string>다시 확인</string>
+	<key>Checking availability…</key>
+	<string>사용 가능 여부 확인 중…</string>
+	<key>Chooses the language the transcript is translated into.</key>
+	<string>전사문을 번역할 언어를 선택합니다.</string>
+	<key>Codex CLI</key>
+	<string>Codex CLI</string>
+	<key>Codex CLI was not found. Install it and run codex login in Terminal, or select Local meanwhile.</key>
+	<string>Codex CLI를 찾지 못했습니다. 설치한 다음 터미널에서 codex login을 실행하거나 그동안 Local을 선택하세요.</string>
+	<key>Codex is installed but not signed in. Run codex login in Terminal, or select Local meanwhile.</key>
+	<string>Codex는 설치되어 있지만 로그인하지 않았습니다. 터미널에서 codex login을 실행하거나 그동안 Local을 선택하세요.</string>
+	<key>Codex is not signed in. Run codex login in Terminal, then try again, or select Local.</key>
+	<string>Codex에 로그인하지 않았습니다. 터미널에서 codex login을 실행한 다음 다시 시도하거나 Local을 선택하세요.</string>
+	<key>Codex is signed in and ready.</key>
+	<string>Codex에 로그인되어 사용할 수 있습니다.</string>
+	<key>Correct</key>
+	<string>교정</string>
+	<key>Input Mode</key>
+	<string>입력 모드</string>
+	<key>Installed and signed in</key>
+	<string>설치됨, 로그인됨</string>
+	<key>Installed, not signed in. Run codex login in Terminal.</key>
+	<string>설치되었지만 로그인하지 않았습니다. 터미널에서 codex login을 실행하세요.</string>
+	<key>Largest Accepted Output Bound</key>
+	<string>최대 허용 출력 한도</string>
+	<key>Largest Batch Estimate</key>
+	<string>최대 배치 추정치</string>
+	<key>Largest Batch Input</key>
+	<string>최대 배치 입력</string>
+	<key>Largest Raw Response</key>
+	<string>최대 원시 응답</string>
+	<key>Model ID</key>
+	<string>모델 ID</string>
+	<key>Operation</key>
+	<string>작업</string>
+	<key>Output Estimate Formula</key>
+	<string>출력 추정식</string>
+	<key>Output Planning Budget</key>
+	<string>출력 계획 예산</string>
+	<key>Output Token Limit</key>
+	<string>출력 토큰 한도</string>
+	<key>Prompt Limit</key>
+	<string>프롬프트 한도</string>
+	<key>Rename this speaker everywhere in this transcript.</key>
+	<string>이 전사문 전체에서 이 화자 이름을 바꿉니다.</string>
+	<key>Segments per Batch</key>
+	<string>배치당 세그먼트 수</string>
+	<key>Service-managed (limit unavailable)</key>
+	<string>서비스 관리됨(한도 미확인)</string>
+	<key>Source Segments SHA-256</key>
+	<string>원본 세그먼트 SHA-256</string>
+	<key>Target Language</key>
+	<string>번역 대상 언어</string>
+	<key>Text only</key>
+	<string>텍스트만</string>
+	<key>Translate</key>
+	<string>번역</string>
+	<key>Translate Into</key>
+	<string>번역할 언어</string>
+	<key>This name applies to every %@ segment in exports.</key>
+	<string>이 이름은 내보낸 모든 %@ 세그먼트에 적용됩니다.</string>
+	<key>Choose Folder…</key>
+	<string>폴더 선택…</string>
+	<key>Use Default</key>
+	<string>기본값 사용</string>
+	<key>Directory choices apply the next time Maccheroni launches. Existing recordings and run artifacts stay where they are.</key>
+	<string>디렉터리 선택은 다음에 Maccheroni를 실행할 때 적용됩니다. 기존 녹음과 실행 아티팩트는 현재 위치에 그대로 둡니다.</string>
+	<key>MACCHERONI_LIBRARY_ROOT controls the recording and run paths for this launch.</key>
+	<string>MACCHERONI_LIBRARY_ROOT는 이번 실행의 녹음과 실행 경로를 제어합니다.</string>
+	<key>Planned Model</key>
+	<string>예정 모델</string>
+	<key>Play this segment from the source audio.</key>
+	<string>이 세그먼트를 소스 오디오에서 재생합니다.</string>
+	<key>Codex receives bounded transcript text, the active profile's full glossary and its hash, post-processing instructions, and the target language when translating. Audio and source artifacts stay on this Mac unchanged.</key>
+	<string>Codex는 범위를 제한한 전사문 텍스트, 활성 프로필의 용어집 전체와 그 해시, 후처리 지침, 번역할 때는 대상 언어를 받습니다. 오디오와 원본 아티팩트는 변경되지 않은 채 이 Mac에 남습니다.</string>
+	<key>A new setup selects Codex only when its CLI is signed in; otherwise it selects Local. Codex receives bounded transcript text, the active profile's full glossary and its hash, post-processing instructions, and the target language when translating. Audio never leaves this Mac.</key>
+	<string>새로 설정하면 Codex CLI에 로그인한 경우에만 Codex를 선택합니다. 그렇지 않으면 Local을 선택합니다. Codex는 범위를 제한한 전사문 텍스트, 활성 프로필의 용어집 전체와 그 해시, 후처리 지침, 번역할 때는 대상 언어를 받습니다. 오디오는 이 Mac을 떠나지 않습니다.</string>
+	<key>Audio stays on this Mac. Transcription runs locally; during post-processing Codex receives bounded transcript text, the active profile's full glossary and its hash, post-processing instructions, and the target language when translating.</key>
+	<string>오디오는 이 Mac에 남습니다. 전사는 로컬에서 실행되며 후처리할 때 Codex는 범위를 제한한 전사문 텍스트, 활성 프로필의 용어집 전체와 그 해시, 후처리 지침, 번역할 때는 대상 언어를 받습니다.</string>
+	</dict>
+</plist>

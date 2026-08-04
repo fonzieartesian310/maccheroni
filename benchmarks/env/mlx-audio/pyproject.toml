@@ -1,0 +1,11 @@
+[project]
+name = "maccheroni-mlx-audio-benchmark"
+version = "0.1.0"
+description = "Pinned Python environment for local Maccheroni benchmark runners."
+requires-python = "==3.12.*"
+dependencies = [
+    "mlx-audio",
+]
+
+[tool.uv]
+package = false

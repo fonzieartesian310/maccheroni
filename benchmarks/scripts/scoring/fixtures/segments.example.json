@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "segments": [
+    {
+      "speaker": "SPEAKER_00",
+      "start_s": 0.4,
+      "end_s": 2.1,
+      "text": "Maccheroni API를 확인합니다.",
+      "language": "ko",
+      "confidence": 0.94,
+      "flags": []
+    },
+    {
+      "speaker": "SPEAKER_01",
+      "start_s": 2.2,
+      "end_s": 4.8,
+      "text": "Va bene, Giovanni.",
+      "language": "it",
+      "flags": [
+        "uncertain"
+      ]
+    }
+  ],
+  "num_speakers": 2,
+  "source": {
+    "file_name": "synthetic.wav",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "duration_s": 10.0
+  }
+}
