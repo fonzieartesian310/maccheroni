@@ -34,8 +34,13 @@ Python contract suites:
 uv run --project Sources/MaccheroniASR/Python python -m unittest discover -s Sources/MaccheroniASR/Python/tests
 uv run --project benchmarks/scripts/scoring python -m unittest benchmarks/scripts/scoring/tests/test_evaluate_moss_long_audio.py
 uv run --project benchmarks/scripts/scoring python -m unittest benchmarks/scripts/scoring/tests/test_evaluate_t14.py
-/usr/bin/python3 -m unittest benchmarks/scripts/runners/tests/test_moss_long_audio_eval_gate.py
+uv run --no-project python -m unittest benchmarks/scripts/runners/tests/test_moss_long_audio_eval_gate.py
 ```
+
+All Python tooling runs through [uv](https://docs.astral.sh/uv/): each Python
+project in the tree carries its own `pyproject.toml` and `uv.lock`, and
+`uv run --project <dir>` creates and reuses the pinned environment on demand.
+No system Python, manual virtualenv, or `pip install` step is required.
 
 Benchmark run artifacts are create-only local directories under
 `benchmarks/runs/` and are gitignored. Never commit them, never overwrite or
@@ -51,7 +56,7 @@ What "verified" means for the core claims:
 
 | Claim | Evidence | Reproduce |
 |---|---|---|
-| Glossary reaches the decoder per leaf | Hash-sealed payloads in run manifests; T14 glossary contract | `swift test`; owner-side: `python3 benchmarks/scripts/scoring/evaluate_t14.py` |
+| Glossary reaches the decoder per leaf | Hash-sealed payloads in run manifests; T14 glossary contract | `swift test`; owner-side: `uv run --project benchmarks/scripts/scoring python benchmarks/scripts/scoring/evaluate_t14.py` |
 | Global speaker consistency | 78-min chunk-boundary stability 1.0; zero mismatches at all root boundaries | same |
 | No promotion of truncated output | Typed `invalid_eos_output` / limit outcomes; EOS-only promotion fixtures | `swift test` |
 | Originals immutable through post-processing | Byte-identical hash assertions before/after correction and translation | `swift test` |
@@ -71,6 +76,19 @@ requested model).
 ## Commit conventions
 
 - English, imperative subject line, one logical change per commit.
+- Write a detailed body for every non-trivial commit. The body alone — without
+  the diff, an issue tracker, or chat history — must let a later reader
+  reconstruct three things:
+  1. **Intent and background**: what problem or observation motivated the
+     change, and any constraint or prior decision that shaped it.
+  2. **The work**: what was changed, at the level of behavior and structure,
+     not a file-by-file paraphrase of the diff.
+  3. **Verification**: the commands run and the results observed.
+- Keep the body dry and technical, and write it to be globally publishable:
+  no personal information, no private paths or hostnames, no profanity, and
+  no sensitive or legally encumbered content. If a detail cannot be published,
+  it does not belong in the message; keep it in local notes and reference the
+  public evidence instead.
 - No co-author trailers and no tool/session links in commit messages.
 - Never commit: real recordings, model caches, audio files (public or
   synthetic fixtures under `Tests/**/Fixtures/` are the only exception),

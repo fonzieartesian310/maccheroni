@@ -35,6 +35,11 @@ Esempio di esportazione (puramente illustrativo, non è l’output del modello):
 
 Le correzioni incerte vengono segnalate e mai sostituite in silenzio. Le etichette dei parlanti provengono da un’unica diarizzazione dell’intero file, quindi rimangono coerenti anche in una registrazione di due ore.
 
+<p align="center">
+  <img src="docs/assets/screenshots/transcript.png" alt="Vista trascrizione di Maccheroni: due parlanti con etichette globali e chip di evidenza per segmento, accanto a un ispettore che mostra lo stato dell'esecuzione, le revisioni fissate dei modelli e il registro del glossario" width="100%">
+</p>
+<p align="center"><em>Ogni esecuzione conserva le sue evidenze: l'ispettore mostra i modelli fissati esatti, lo stato dell'esecuzione e se il glossario ha raggiunto il decoder.</em></p>
+
 ## Perché esiste
 
 Il 2 agosto 2026 abbiamo esaminato a livello di codice sorgente sette app macOS per la trascrizione locale. Nessuna offriva la combinazione necessaria nelle riunioni realmente multilingue:
@@ -53,25 +58,10 @@ Tutti i componenti esistono già nelle librerie. Mancava la loro combinazione in
 
 ## Come funziona
 
-```mermaid
-flowchart LR
-    accTitle: Pipeline Maccheroni
-    accDescr: L’audio viene acquisito ed elaborato sul Mac. Solo il percorso Codex facoltativo invia fuori dal dispositivo blocchi di testo limitati.
-    subgraph mac["Il tuo Mac (l’audio non esce mai)"]
-        A["Acquisizione<br/>microfono + audio di sistema"] --> B["Diarizzazione dell’intero file<br/>una timeline globale dei parlanti"]
-        A --> C["Segmenti ASR<br/>massimo 120 s ciascuno,<br/>glossario inserito in ogni segmento"]
-        B --> D["Unione tramite timestamp<br/>la timeline determina i parlanti"]
-        C --> D
-        D --> E["Post-elaborazione locale<br/>correzione / traduzione<br/>MLX sul dispositivo"]
-    end
-    D -.-> F["Percorso Codex (facoltativo)<br/>solo testo in blocchi limitati,<br/>il tuo abbonamento"]
-    style mac fill:#FDF8EC,stroke:#C2410C,color:#431407
-    linkStyle default stroke:#8B5E3C,stroke-width:1.5px
-    classDef step fill:#FFFFFF,stroke:#B45309,color:#431407
-    classDef opt fill:#F1F5F9,stroke:#64748B,color:#1E293B,stroke-dasharray:4 3
-    class A,B,C,D step
-    class E,F opt
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/pipeline-dark.drawio.svg">
+  <img src="docs/assets/pipeline-light.drawio.svg" alt="Diagramma della pipeline: sul Mac, l'acquisizione alimenta la diarizzazione dell'intero file e i segmenti ASR da 120 secondi con iniezione del glossario per segmento; la fusione per timestamp, in cui la timeline decide i parlanti, alimenta la post-elaborazione opzionale sul dispositivo; l'unica cosa che lascia il Mac è la corsia opzionale di post-elaborazione remota verso un fornitore esterno tramite l'accesso Codex, solo testo" width="100%">
+</picture>
 
 I segmenti non riusciti vengono suddivisi di nuovo entro limiti tipizzati (minimo 30 s, profondità 3). Solo gli output con token di fine sequenza vengono promossi nella trascrizione canonica. Il percorso Codex facoltativo invia, tramite il tuo abbonamento ChatGPT/Codex, testo della trascrizione in blocchi limitati, glossario attivo e istruzioni: mai l’audio e mai i percorsi dei file.
 
@@ -92,13 +82,25 @@ Ogni modello è fissato tramite ID Hugging Face + revisione + quantizzazione e v
 
 Tutti i risultati provengono da fixture pubbliche o sintetiche. Gli ID delle valutazioni e gli hash degli artefatti sono registrati in [docs/](docs/).
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/benchmarks-dark.svg">
+  <img src="docs/assets/benchmarks-light.svg" alt="Grafici a barre: CER e WER per fixture (dialogo coreano 0.081/0.128, due parlanti italiani 0.033/0.081), recupero dei termini del glossario (0.95 e 0.778 rispetto alla soglia 0.75) e tasso di errore di diarizzazione (0.048 sintetico, 0.152 VoxConverse)" width="100%">
+</picture>
+
 | Fixture | Modello | CER | WER | Recupero dei termini | Omissioni | DER |
 |---|---|---:|---:|---:|---:|---:|
 | Dialogo coreano, glossario di 20 termini | VibeVoice | 0.081 | 0.128 | 0.95 | 0 | — |
 | Conversazione sintetica in italiano con 2 parlanti (10 min), glossario di 9 termini | MOSS | 0.033 | 0.081 | 0.78 | 0 | 0.048 |
 | Campione VoxConverse (78 min) | VibeVoice + Pyannote | — | — | — | — | 0.152 |
 
+Coreano e italiano sono i primi due profili di lingua; nuove fixture linguistiche entrano in questa tabella man mano che vengono misurate.
+
 Nel campione di 78 minuti, la stabilità dei parlanti ai confini dei segmenti è 1.0 per entrambi i parlanti di riferimento. Una matrice fissa di 600 secondi ha mostrato che i segmenti MOSS oltre 120 s perdono completamente la struttura dei timestamp. Per questo il limite di produzione è 120 s; i dettagli sono in [docs/moss-long-audio-verdict.md](docs/moss-long-audio-verdict.md).
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/leaf-cap-dark.svg">
+  <img src="docs/assets/leaf-cap-light.svg" alt="Grafico a barre: sullo stesso input di 600 secondi, i segmenti da 120 s producono 5 foglie canoniche con fine sequenza (superato), quelli da 240 e 300 s producono 0 foglie valide (errori tipizzati invalid_eos_output), e il recupero forzato da genitori di 240 s produce 5 figli validi da 120 s" width="100%">
+</picture>
 
 ## Installazione
 
@@ -123,6 +125,10 @@ L’app stampa il percorso del bundle quando la compilazione, l’inventario del
 Sono inclusi profili per riunioni in coreano (`ko-meeting`, VibeVoice) e dialoghi in italiano (`it-dialogue`, MOSS). Per il modello locale facoltativo di post-elaborazione, esegui `zsh scripts/setup-postprocess-runtime.zsh`.
 
 ## Privacy
+
+<p align="center">
+  <img src="docs/assets/screenshots/capture.png" alt="Vista di acquisizione di Maccheroni: selettore del profilo con metriche misurate, scelta di post-elaborazione tra Codex, Local e None, e l'avviso che l'audio non lascia mai questo Mac" width="100%">
+</p>
 
 - Trascrizione, VAD e diarizzazione vengono eseguite interamente in locale. I byte dell’audio non raggiungono mai alcun percorso di rete: lo garantiscono i test, non una semplice regola.
 - Il percorso facoltativo di post-elaborazione Codex invia solo testo e richiede il consenso per ogni esecuzione. Avvia `codex exec` in uno spazio di lavoro temporaneo vuoto, con sandbox di sola lettura e isolamento della configurazione utente; il prompt contiene il testo dei segmenti, il glossario attivo e le istruzioni. Scegliendo il modello MLX locale, anche il testo rimane sul dispositivo.

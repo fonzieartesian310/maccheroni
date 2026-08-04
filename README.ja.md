@@ -34,6 +34,11 @@
 
 不確かな修正は黙って置き換えず、フラグを付けます。話者ラベルはファイル全体に対する1回の話者分離から得るため、2時間の録音でも一貫性が保たれます。
 
+<p align="center">
+  <img src="docs/assets/screenshots/transcript.png" alt="Maccheroniのトランスクリプト画面: グローバルラベル付きの2人の話者とセグメントごとのエビデンスチップ、隣にrunステータス、固定されたモデルrevision、glossary記録を表示するインスペクタ" width="100%">
+</p>
+<p align="center"><em>各runはエビデンスを保持します。インスペクタには固定された正確なモデル、runのステータス、glossaryがデコーダに届いたかどうかが表示されます。</em></p>
+
 ## このプロジェクトを作った理由
 
 2026-08-02に、macOS向けローカル文字起こしアプリ7本をソースレベルで監査しました。実際の混在言語会議に必要な組み合わせを満たすアプリはありませんでした。
@@ -52,25 +57,10 @@
 
 ## 仕組み
 
-```mermaid
-flowchart LR
-    accTitle: Maccheroniパイプライン
-    accDescr: 音声はMacで収録して処理します。デバイス外へ送信するのは任意のCodex経路で扱う上限付きテキストだけです。
-    subgraph mac["あなたのMac（音声は外部に出ません）"]
-        A["収録<br/>マイク + システム音声"] --> B["ファイル全体の話者分離<br/>1本のグローバルな話者timeline"]
-        A --> C["ASR leaf<br/>各leafは最大120秒、<br/>leafごとに用語集を注入"]
-        B --> D["Timestamp結合<br/>timelineが話者を決定"]
-        C --> D
-        D --> E["ローカル後処理<br/>修正 / 翻訳<br/>デバイス上のMLX"]
-    end
-    D -.-> F["Codex経路（任意）<br/>上限付きテキストのみ、<br/>自分のサブスクリプション"]
-    style mac fill:#FDF8EC,stroke:#C2410C,color:#431407
-    linkStyle default stroke:#8B5E3C,stroke-width:1.5px
-    classDef step fill:#FFFFFF,stroke:#B45309,color:#431407
-    classDef opt fill:#F1F5F9,stroke:#64748B,color:#1E293B,stroke-dasharray:4 3
-    class A,B,C,D step
-    class E,F opt
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/pipeline-dark.drawio.svg">
+  <img src="docs/assets/pipeline-light.drawio.svg" alt="パイプライン図: Mac内でキャプチャがファイル全体の話者分離と120秒のASR leaf(leafごとにglossary注入)につながり、タイムラインが話者を決めるタイムスタンプmergeを経て任意のオンデバイス後処理へ続く。Macから出るのはopt-inのリモート後処理レーンのみで、外部ベンダーへはCodexサインインで接続し、テキストだけを送る" width="100%">
+</picture>
 
 失敗したleafはtyped bound内で再分割します。最小30秒、深さは最大3です。End-of-sequence出力だけをcanonical transcriptへ昇格させます。任意のCodex経路は、自分のChatGPT/Codexサブスクリプションを使い、上限を設けた文字起こしテキスト、有効な用語集、指示だけを送信します。音声もファイルパスも送信しません。
 
@@ -91,13 +81,25 @@ flowchart LR
 
 すべて公開fixtureまたは合成fixtureから得た結果です。評価IDとartifact hashは[docs/](docs/)に記録しています。
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/benchmarks-dark.svg">
+  <img src="docs/assets/benchmarks-light.svg" alt="棒グラフ: フィクスチャ別のCERとWER（韓国語対話 0.081/0.128、イタリア語2話者 0.033/0.081）、glossary用語再現率（ゲート0.75に対して0.95と0.778）、話者分離エラー率（合成 0.048、VoxConverse 0.152）" width="100%">
+</picture>
+
 | フィクスチャ | モデル | CER | WER | 用語再現率 | 欠落 | DER |
 |---|---|---:|---:|---:|---:|---:|
 | 韓国語の対話、20語の用語集 | VibeVoice | 0.081 | 0.128 | 0.95 | 0 | — |
 | イタリア語の2話者合成音声（10分）、9語の用語集 | MOSS | 0.033 | 0.081 | 0.78 | 0 | 0.048 |
 | VoxConverseサンプル（78分） | VibeVoice + Pyannote | — | — | — | — | 0.152 |
 
+韓国語とイタリア語が最初の2つの言語プロファイルです。新しい言語フィクスチャは測定でき次第この表に追加します。
+
 78分のサンプルでは、chunk境界での話者安定性が両方の基準話者について1.0でした。固定した600秒のmatrixでは、120秒を超えるMOSS leafがtimestamp構造を完全に失いました。このためproduction leafの上限を120秒に設定しています。詳細は[docs/moss-long-audio-verdict.md](docs/moss-long-audio-verdict.md)にあります。
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/leaf-cap-dark.svg">
+  <img src="docs/assets/leaf-cap-light.svg" alt="棒グラフ: 同じ600秒の入力で、120秒leafは5つの正準EOS leafを生成（合格）、240秒と300秒のleafは有効leaf 0（型付きinvalid_eos_output失敗）、240秒の親からの強制リカバリは有効な120秒の子を5つ生成" width="100%">
+</picture>
 
 ## インストール
 
@@ -122,6 +124,10 @@ build、resource allowlist inventory、strict codesignの各チェックに合�
 韓国語会議用profile（`ko-meeting`、VibeVoice）とイタリア語対話用profile（`it-dialogue`、MOSS）が付属します。任意のローカル後処理モデルを使う場合は、`zsh scripts/setup-postprocess-runtime.zsh`を実行してください。
 
 ## プライバシー
+
+<p align="center">
+  <img src="docs/assets/screenshots/capture.png" alt="Maccheroniのキャプチャ画面: 測定済みメトリクス付きのプロファイル選択、Codex・Local・Noneのpost-processing選択、音声がこのMacから出ないことの表示" width="100%">
+</p>
 
 - 文字起こし、VAD、話者分離は完全にローカルで実行します。音声byteがnetwork pathへ到達することはありません。ポリシーではなくtestで強制しています。
 - 任意のCodex後処理経路はテキストのみを扱い、runごとに選択します。空の一時workspaceでread-only sandboxとユーザー設定の分離を適用し、`codex exec`を起動します。promptに含まれるのはsegment text、有効な用語集、指示です。代わりにローカルMLXモデルを選ぶと、テキストもデバイス内に残ります。

@@ -34,6 +34,11 @@
 
 不确定的修正会标记出来，绝不会静默替换。说话人标签来自一次全文件说话人分离，因此在两小时的录音中也能保持一致。
 
+<p align="center">
+  <img src="docs/assets/screenshots/transcript.png" alt="Maccheroni 转写视图：两位说话人带全局标签和每段证据标记，旁边的检查器显示运行状态、固定的模型 revision 和词汇表记录" width="100%">
+</p>
+<p align="center"><em>每次运行都保留证据：检查器显示固定的模型、运行状态，以及词汇表是否送达解码器。</em></p>
+
 ## 项目缘起
 
 2026-08-02，我们从源码层面审查了七款 macOS 本地转写应用。没有一款具备真实混合语言会议所需的完整组合：
@@ -52,25 +57,10 @@
 
 ## 工作原理
 
-```mermaid
-flowchart LR
-    accTitle: Maccheroni 处理流程
-    accDescr: 音频在 Mac 上采集和处理。只有可选的 Codex 路径会将有长度上限的文本发送到设备外。
-    subgraph mac["你的 Mac（音频绝不离开设备）"]
-        A["采集<br/>麦克风 + 系统音频"] --> B["全文件说话人分离<br/>一条全局说话人 timeline"]
-        A --> C["ASR leaf<br/>每段最长 120 秒，<br/>每个 leaf 注入术语表"]
-        B --> D["按 Timestamp 合并<br/>timeline 决定说话人"]
-        C --> D
-        D --> E["本地后处理<br/>修正 / 翻译<br/>设备端 MLX"]
-    end
-    D -.-> F["Codex 路径（可选）<br/>仅发送有长度上限的文本，<br/>使用你的订阅"]
-    style mac fill:#FDF8EC,stroke:#C2410C,color:#431407
-    linkStyle default stroke:#8B5E3C,stroke-width:1.5px
-    classDef step fill:#FFFFFF,stroke:#B45309,color:#431407
-    classDef opt fill:#F1F5F9,stroke:#64748B,color:#1E293B,stroke-dasharray:4 3
-    class A,B,C,D step
-    class E,F opt
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/pipeline-dark.drawio.svg">
+  <img src="docs/assets/pipeline-light.drawio.svg" alt="流水线图:在 Mac 上,采集送入整文件说话人分离和120秒 ASR leaf(每个 leaf 注入词汇表);时间戳合并由时间线决定说话人,再送入可选的设备端后处理;离开 Mac 的只有可选的远程后处理通道,通过 Codex 登录连接外部供应商,且仅传输文本" width="100%">
+</picture>
 
 失败的 leaf 会在 typed bound 内重新分割，最短30秒，最大深度为3。只有 end-of-sequence 输出才能升级为 canonical transcript。可选的 Codex 路径通过你自己的 ChatGPT/Codex 订阅发送有长度上限的转写文本、当前术语表和指令。它绝不发送音频或文件路径。
 
@@ -91,13 +81,25 @@ flowchart LR
 
 所有结果均来自公开或合成 fixture；评估 ID 和 artifact hash 记录在 [docs/](docs/) 中。
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/benchmarks-dark.svg">
+  <img src="docs/assets/benchmarks-light.svg" alt="柱状图：各测试样本的 CER 和 WER（韩语对话 0.081/0.128，意大利语双说话人 0.033/0.081）、词汇表术语召回率（0.95 和 0.778，门限 0.75）以及说话人分离错误率（合成 0.048，VoxConverse 0.152）" width="100%">
+</picture>
+
 | 测试样本 | 模型 | CER | WER | 术语召回率 | 遗漏数 | DER |
 |---|---|---:|---:|---:|---:|---:|
 | 韩语对话，20个术语 | VibeVoice | 0.081 | 0.128 | 0.95 | 0 | — |
 | 意大利语双人合成音频（10分钟），9个术语 | MOSS | 0.033 | 0.081 | 0.78 | 0 | 0.048 |
 | VoxConverse 样本（78分钟） | VibeVoice + Pyannote | — | — | — | — | 0.152 |
 
+韩语和意大利语是最早的两个语言配置;新的语言测试样本在完成测量后会加入此表。
+
 在78分钟样本中，两位参考说话人的 chunk 边界稳定性都是1.0。固定的600秒 matrix 显示，超过120秒的 MOSS leaf 会完全丢失 timestamp 结构，因此生产环境的 leaf 上限设为120秒。详情见 [docs/moss-long-audio-verdict.md](docs/moss-long-audio-verdict.md)。
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/leaf-cap-dark.svg">
+  <img src="docs/assets/leaf-cap-light.svg" alt="柱状图：在同一段600秒输入上，120秒 leaf 产生5个规范的 EOS leaf（通过），240秒和300秒 leaf 产生0个有效 leaf（类型化的 invalid_eos_output 失败），从240秒父节点强制恢复产生5个有效的120秒子节点" width="100%">
+</picture>
 
 ## 安装
 
@@ -122,6 +124,10 @@ build、resource allowlist inventory 和 strict codesign 检查全部通过后�
 内置韩语会议 profile（`ko-meeting`，VibeVoice）和意大利语对话 profile（`it-dialogue`，MOSS）。若要使用可选的本地后处理模型，请运行 `zsh scripts/setup-postprocess-runtime.zsh`。
 
 ## 隐私
+
+<p align="center">
+  <img src="docs/assets/screenshots/capture.png" alt="Maccheroni 采集视图：带实测指标的配置选择、Codex、Local 与 None 之间的后处理选择，以及音频绝不离开这台 Mac 的提示" width="100%">
+</p>
 
 - 转写、VAD 和说话人分离完全在本地执行。音频 byte 绝不会进入任何 network path。这一限制由 test 强制执行，并非只写在政策中。
 - 可选的 Codex 后处理路径只发送文本，并且每次运行都需要主动选择。它在空的临时 workspace 中启动 `codex exec`，使用 read-only sandbox 并隔离用户设置。prompt 只包含 segment text、当前术语表和指令。选择本地 MLX 模型后，连文本也会留在设备上。
